@@ -5,4 +5,4 @@ const postActivity = async function(res, req) {
 
 }
 
-module.exports = { postActivity };
+module.exports = postActivity;
