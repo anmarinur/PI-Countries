@@ -22,6 +22,7 @@ const getCountry = async (req, res) => {
       attributes: ['flagImg', 'name', 'continent']
     });
     res.json(result);
+    
   } catch (error) {
     res.send(error);
   }
