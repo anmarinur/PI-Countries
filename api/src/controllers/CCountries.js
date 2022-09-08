@@ -18,11 +18,11 @@ const getCountry = async (req, res) => {
       };
     });
     await Country.bulkCreate(infoData);
-    const result = await Country.findAll({
+    const allCountriesFront = await Country.findAll({
       attributes: ['flagImg', 'name', 'continent']
     });
-    res.json(result);
-    
+    res.json(allCountriesFront);
+
   } catch (error) {
     res.send(error);
   }
