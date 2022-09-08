@@ -4,9 +4,8 @@ const { Country, Activity, CountryActivity } = require('../db');
 const getCountry = async (req, res) => {
 
   try {
-    let countries = (await axios.get('https://restcountries.com/v3/all'));
-    console.log('start info')
-    countries = countries.data.map(p => {
+    let infoApi = await axios.get('https://restcountries.com/v3/all');
+    let infoData = await infoApi.data.map(p => {
       console.log(p.capital)
       return {
           id: p.cca3,
@@ -19,14 +18,16 @@ const getCountry = async (req, res) => {
           population: p.population
       };
     });
-    res.json(countries);
+    res.json(infoData);
   } catch (error) {
     res.send(error)
   }
 }
 
 const getCountryById = async function (req, res) {
-
+  const {idPais} = req.params;
+  console.log(idPais)
+ 
 }
 
 module.exports = {
