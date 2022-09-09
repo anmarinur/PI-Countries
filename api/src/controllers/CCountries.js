@@ -2,7 +2,7 @@ const axios = require('axios');
 const { Op } = require('sequelize');
 const { Country, Activity, CountryActivity } = require('../db');
 
-const getCountry = async (req, res) => {
+const getCountry = async (req, res, next) => {
   const { name } = req.query;
   if (!name) {
     try {
@@ -26,7 +26,7 @@ const getCountry = async (req, res) => {
       res.json(allCountriesFront);
   
     } catch (error) {
-      res.send(error);
+      next(error);
     }
   } else {
     try {
@@ -47,12 +47,12 @@ const getCountry = async (req, res) => {
       }
       
     } catch (error) {
-      console.log(error)
+      next(error);
     }
   }
 }
 
-const getCountryById = async function (req, res) {
+const getCountryById = async function (req, res, next) {
   const {idPais} = req.params;
 
   try {
@@ -69,7 +69,7 @@ const getCountryById = async function (req, res) {
     }
     res.json(infoCountry)
   } catch (error) {
-    console.log(error)
+    next(error)
   }
   
 }

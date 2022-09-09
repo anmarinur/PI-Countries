@@ -4,6 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define('Activity', {
     id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
       allowNull: false,
       primaryKey: true
     },
@@ -12,7 +13,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: ' '
     },
-    difficult: {
+    difficulty: {
       type: DataTypes.INTEGER,
       validate: {
         min: 1,
