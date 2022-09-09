@@ -30,7 +30,25 @@ const getCountry = async (req, res) => {
 
 const getCountryById = async function (req, res) {
   const {idPais} = req.params;
-  console.log(idPais);
+  // console.log(idPais);
+
+  try {
+    const infoCountry = await Country.findAll({
+      where: {
+        id: idPais
+      },
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'] 
+      }
+    })
+    // console.log(infoCountry)
+    if (infoCountry.length === 0) {
+      res.json('País no encontrado')
+    }
+    res.json(infoCountry)
+  } catch (error) {
+    console.log(error)
+  }
   
 }
 
