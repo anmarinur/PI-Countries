@@ -62,6 +62,9 @@ const getCountryById = async function (req, res, next) {
       },
       attributes: {
         exclude: ['createdAt', 'updatedAt'] 
+      },
+      include: {
+        model: Activity,
       }
     })
     if (infoCountry.length === 0) {
