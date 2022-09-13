@@ -7,10 +7,13 @@ const postActivity = async function(req, res, next) {
   try {
     if (name) {
       const activity = await Activity.create({
-        name, difficulty, duration, season
+        name, difficulty, duration, season, countries
       });
-      Activity.addCountry(countries);
-      res.json(activity);
+      const actividad = await Activity.findByPk('6295abb0-3311-11ed-ac12-610771885821');
+      await actividad.addCountry(countries)
+      
+      console.log(actividad);
+      res.json(actividad);
     } else {
       res.json('Datos incompletos');
     }
