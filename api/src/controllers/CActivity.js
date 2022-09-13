@@ -11,7 +11,20 @@ const postActivity = async function(req, res, next) {
     });
 
     await activity.addCountry(countries);
-    res.json(activity);
+
+    const prueba = await Country.findAll({
+      include: {
+        model: Activity,
+        as: 'Activities'
+      }
+    });
+
+    const prueba2 = await Activity.findAll({
+      include: {
+        model: Country
+      }
+    })
+    res.json(prueba2);
 
   } catch (error) {
     next(error);
