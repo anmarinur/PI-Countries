@@ -7,8 +7,12 @@ const getCountry = async (req, res, next) => {
   if (!name) {
     try {
       let infoApi = await axios.get('https://restcountries.com/v3/all');
-      let infoData = await infoApi.data.map(p => { 
-        return {
+      infoApi.data.map(p => { 
+        Country.findOrCreate({
+          where: {
+            id: p.cca3
+          },
+          defaults: {
             id: p.cca3,
             name: p.name.common,
             flagImg: p.flags[1],
@@ -17,17 +21,17 @@ const getCountry = async (req, res, next) => {
             subregion: p.subregion,
             area: p.area,
             population: p.population
-        };
+          }
+        });
       });
-      await Country.bulkCreate(infoData);
       const allCountriesFront = await Country.findAll({
         attributes: ['flagImg', 'name', 'continent']
       });
       res.json(allCountriesFront);
-  
-    } catch (error) {
-      next(error);
-    }
+            
+      } catch (error) {
+        next(error);
+      }
   } else {
     try {
       const countryByName = await Country.findAll({
@@ -39,7 +43,7 @@ const getCountry = async (req, res, next) => {
         attributes: {
           exclude: ['createdAt', 'updatedAt']
         }
-      })
+      });
       if (countryByName.length !== 0) {
         res.json(countryByName);
       } else {
@@ -51,6 +55,7 @@ const getCountry = async (req, res, next) => {
     }
   }
 }
+
 
 const getCountryById = async function (req, res, next) {
   const {idPais} = req.params;
