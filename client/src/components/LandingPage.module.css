@@ -11,9 +11,10 @@
 
 .content {
   position: fixed;
-  right: 50px;
-  bottom: 50px;
+  right: 80px;
+  bottom: 230px;
   color: white;
+  font-family: 'Reem Kufi Ink', sans-serif;
 }
 
 .body {
@@ -24,4 +25,26 @@
   min-width: 100%;
   min-height: 100%;
   z-index: -2;
+}
+
+.h1 {
+  font-size: 200px;
+  margin-left: 30px;
+  margin-bottom: 0px;
+}
+
+.h2 {
+  font-size: 70px;
+  margin-top: 0px;
+}
+
+.button {
+  background-color: white;
+  width: 200px;
+  height: 80px;
+  font-family: 'Reem Kufi Ink', sans-serif;
+  font-size: 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
