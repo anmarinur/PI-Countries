@@ -14,7 +14,21 @@ export function Home(){
 
   return (
     <div>
-      <h1>Home</h1>
+      <input placeholder="Country name..."></input>
+      <button>Search</button>
+      <select>
+        <option>Name asc</option>
+        <option>Name desc</option>
+        <option>Population asc</option>
+        <option>Population desc</option>
+      </select>
+      <select>
+        <option>America</option>
+        <option>Africa</option>
+        <option>Asia</option>
+        <option>Europa</option>
+        <option>Oceanía</option>
+      </select>
       {
         allCountries && allCountries.map((el) => {
           return (
