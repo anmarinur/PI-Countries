@@ -1,0 +1,27 @@
+.video {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  right: 0;
+  margin: auto 0;
+  z-index: -1;
+  clip-path: circle(37%);
+}
+
+.content {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  color: white;
+}
+
+.body {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: black;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -2;
+}
