@@ -26,6 +26,7 @@ export function Home(){
 
   function handlerFilterContinent(e){
     dispatch(filterCountryByContinent(e.target.value));
+    setCurrentPage(1);
   }
 
   return (
