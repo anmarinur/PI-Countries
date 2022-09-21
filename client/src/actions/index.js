@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_COUNTRIES } from '../types';
+import { FILTER_BY_CONTINENTS, GET_COUNTRIES } from '../types';
 
 
 export function getCountries() {
@@ -9,5 +9,13 @@ export function getCountries() {
       type: GET_COUNTRIES,
       payload: json.data
     })
+  }
+}
+
+export function filterCountryByContinent(payload) {
+  console.log(payload)
+  return {
+    type: FILTER_BY_CONTINENTS,
+    payload
   }
 }
