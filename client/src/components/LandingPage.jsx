@@ -10,7 +10,7 @@ export default function LandingPage (){
         <h1 className={style.h1}>Countries PI</h1>
         <h2 className={style.h2}>Anderson Marín</h2>
         <Link to="/home">
-          <button className={style.button}>Enter</button>
+          <button className={style.button}><span>Enter</span></button>
         </Link>
       </div>
       <video className={style.video} autoPlay muted loop>
