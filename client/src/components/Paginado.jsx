@@ -1,3 +1,5 @@
+import style from './Paginado.module.css'
+
 export default function Paginado({countriesPerPage, allCountries, paginado}) {
   const pageNumbers = [];
 
@@ -10,7 +12,7 @@ export default function Paginado({countriesPerPage, allCountries, paginado}) {
       <ul>
         { pageNumbers && pageNumbers.map(number => {
           return (
-          <button key={number} onClick={() => paginado(number)}>{number}</button>
+          <button className={style.button} key={number} onClick={() => paginado(number)}>{number}</button>
           )
         })}
       </ul>
