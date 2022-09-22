@@ -1,76 +1,72 @@
-.video {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 30px;
-  right: 0;
-  margin: auto 0;
-  z-index: -1;
-  clip-path: circle(37%);
-}
-
-.content {
-  position: fixed;
-  right: 80px;
-  bottom: 230px;
-  color: white;
-  font-family: 'Reem Kufi Ink', sans-serif;
-}
-
-.body {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+.component {
+  display: flex;
   background: black;
   min-width: 100%;
   min-height: 100%;
   z-index: -2;
 }
 
-.h1 {
-  font-size: 200px;
-  margin-left: 30px;
-  margin-bottom: 0px;
+.text {
+    color: white;
+    font-family: 'Reem Kufi Ink', sans-serif;
 }
 
-.h2 {
-  font-size: 70px;
-  margin-top: 0px;
-}
+  /* .container_video {
+    display: flex;
+    align-items: center;
+  }
 
-.button {
-  background-color: white;
-  width: 200px;
-  height: 80px;
-  font-family: 'Reem Kufi Ink', sans-serif;
-  font-size: 30px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.5s;
-}
+  .video {
+    z-index: -1;
+    clip-path: circle(37%);
+  }
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
 
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
 
-.button:hover span {
-  padding-right: 25px;
-}
+  .h1 {
+    font-size: 200px;
+    margin-left: 30px;
+    margin-bottom: 0px;
+  }
 
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
+  .h2 {
+    font-size: 70px;
+    margin-top: 0px;
+  }
+
+  .button {
+    background-color: white;
+    width: 200px;
+    height: 80px;
+    font-family: 'Reem Kufi Ink', sans-serif;
+    font-size: 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .button:hover span {
+    padding-right: 25px;
+  }
+
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  } */
