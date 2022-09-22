@@ -1,4 +1,4 @@
-import { FILTER_BY_CONTINENTS, GET_COUNTRIES, ORDER_BY_NAME } from "../types";
+import { FILTER_BY_CONTINENTS, GET_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION } from "../types";
 
 const initialState = {
   countries: [],
@@ -21,7 +21,7 @@ function rootReducer(state = initialState, action){
         countries: statusFiltered
       }
     case ORDER_BY_NAME:
-      let arraySorted = action.payload === 'ascName' ? 
+      let arraySortedName = action.payload === 'ascName' ? 
         state.countries.sort((a, b) => {
           if (a.name > b.name) {
             return 1;
@@ -42,9 +42,32 @@ function rootReducer(state = initialState, action){
         });
       return {
         ...state,
-        countries: arraySorted
+        countries: arraySortedName
       }
-        
+    case ORDER_BY_POPULATION:
+      let arraySortedPop = action.payload === 'ascPop' ?
+        state.countries.sort((a, b) => {
+          if (a.population > b.population) {
+            return 1;
+          }
+          if (a.population < b.population) {
+            return -1;
+          }
+          return 0;
+        }) : 
+        state.countries.sort((a, b) => {
+          if (a.population > b.population) {
+            return -1;
+          }
+          if (a.population < b.population) {
+            return 1;
+          }
+          return 0;
+        });
+      return {
+        ...state,
+        countries: arraySortedPop
+      }
     default:
       return state;  
   }

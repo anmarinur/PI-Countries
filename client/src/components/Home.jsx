@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getCountries, filterCountryByContinent, orderByName } from "../actions";
+import { getCountries, filterCountryByContinent, orderByName, orderByPopulation } from "../actions";
 import Card from './Card';
 import Paginado from './Paginado';
 
@@ -27,13 +27,22 @@ export function Home(){
   }, [dispatch]);
 
   function handlerFilterContinent(e){
+    e.preventDefault();
     dispatch(filterCountryByContinent(e.target.value));
     setCurrentPage(1);
     setRender(`Actualizado por ${e.target.value}`)
   }
 
   function handlerOrderByName(e){
+    e.preventDefault();
     dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setRender(`Actualizado por ${e.target.value}`)
+  }
+
+  function handlerOrderByPopulation(e){
+    e.preventDefault();
+    dispatch(orderByPopulation(e.target.value));
     setCurrentPage(1);
     setRender(`Actualizado por ${e.target.value}`)
   }
@@ -47,9 +56,10 @@ export function Home(){
         <option value="ascName">Ascendent</option>
         <option value="descName">Descendent</option>
       </select>
-      <select>
-        <option>Population asc</option>
-        <option>Population desc</option>
+      <select onChange={(e) => handlerOrderByPopulation(e)}>
+        <option>By Population</option>
+        <option value="ascPop">Ascendent</option>
+        <option value="descPop">Descendent</option>
       </select>
       <select onChange={(e) => handlerFilterContinent(e)}>
         <option value="All">All</option>
