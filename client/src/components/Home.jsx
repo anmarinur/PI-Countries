@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getCountries, filterCountryByContinent } from "../actions";
+import { getCountries, filterCountryByContinent, orderByName } from "../actions";
 import Card from './Card';
 import Paginado from './Paginado';
 
@@ -8,6 +8,8 @@ export function Home(){
 
   const allCountries = useSelector((state) => state.countries)
   const dispatch = useDispatch();
+
+  const [render, setRender] = useState('')
   
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);  // 1
@@ -27,15 +29,25 @@ export function Home(){
   function handlerFilterContinent(e){
     dispatch(filterCountryByContinent(e.target.value));
     setCurrentPage(1);
+    setRender(`Actualizado por ${e.target.value}`)
+  }
+
+  function handlerOrderByName(e){
+    dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setRender(`Actualizado por ${e.target.value}`)
   }
 
   return (
     <div>
       <input placeholder="Country name..."></input>
       <button>Search</button>
+      <select onChange={(e) => handlerOrderByName(e)}>
+        <option>By Name</option>
+        <option value="ascName">Ascendent</option>
+        <option value="descName">Descendent</option>
+      </select>
       <select>
-        <option>Name asc</option>
-        <option>Name desc</option>
         <option>Population asc</option>
         <option>Population desc</option>
       </select>
