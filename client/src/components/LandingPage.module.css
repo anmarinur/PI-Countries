@@ -3,70 +3,77 @@
   background: black;
   min-width: 100%;
   min-height: 100%;
-  z-index: -2;
+}
+
+.video {
+  margin: 0;
+  padding: 0;
+  width: 30%;
 }
 
 .text {
-    color: white;
-    font-family: 'Reem Kufi Ink', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Reem Kufi Ink', sans-serif;
+  width: 70%;
 }
 
-  /* .container_video {
-    display: flex;
-    align-items: center;
-  }
+.headers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+}
 
-  .video {
-    z-index: -1;
-    clip-path: circle(37%);
-  }
+.h1 {
+  min-width: 100%;
+  font-size: 200px;
+  margin: 0 auto -50px auto;
+  padding-bottom: 0;
+}
 
+.h2 {
+  font-size: 70px;
+  margin-top: 0;
+  padding-top: 0;
+}
 
+.button {
+  background-color: white;
+  width: 200px;
+  height: 80px;
+  font-family: 'Reem Kufi Ink', sans-serif;
+  font-size: 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
 
-  .h1 {
-    font-size: 200px;
-    margin-left: 30px;
-    margin-bottom: 0px;
-  }
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
 
-  .h2 {
-    font-size: 70px;
-    margin-top: 0px;
-  }
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
 
-  .button {
-    background-color: white;
-    width: 200px;
-    height: 80px;
-    font-family: 'Reem Kufi Ink', sans-serif;
-    font-size: 30px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.5s;
-  }
+.button:hover span {
+  padding-right: 25px;
+}
 
-  .button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-
-  .button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
-
-  .button:hover span {
-    padding-right: 25px;
-  }
-
-  .button:hover span:after {
-    opacity: 1;
-    right: 0;
-  } */
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
