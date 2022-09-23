@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getCountries, filterCountryByContinent, orderByName, orderByPopulation } from "../actions";
 import Card from './Card';
 import Paginado from './Paginado';
+import SearchBar from "./SearchBar";
 
 export function Home(){
 
@@ -49,8 +50,7 @@ export function Home(){
 
   return (
     <div>
-      <input placeholder="Country name..."></input>
-      <button>Search</button>
+      <SearchBar />
       <select onChange={(e) => handlerOrderByName(e)}>
         <option>By Name</option>
         <option value="ascName">Ascendent</option>

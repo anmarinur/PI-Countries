@@ -1,4 +1,4 @@
-import { FILTER_BY_CONTINENTS, GET_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION } from "../types";
+import { FILTER_BY_CONTINENTS, GET_COUNTRIES, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION } from "../types";
 
 const initialState = {
   countries: [],
@@ -8,6 +8,12 @@ const initialState = {
 function rootReducer(state = initialState, action){
   switch (action.type) {
     case GET_COUNTRIES: 
+      return {
+        ...state,
+        countries: action.payload,
+        countriesBackUp: action.payload
+      }
+    case GET_NAME_COUNTRIES:
       return {
         ...state,
         countries: action.payload,
