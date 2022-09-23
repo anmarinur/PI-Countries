@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCountries, filterCountryByContinent, orderByName, orderByPopulation } from "../actions";
 import Card from './Card';
+import Error from "./Error";
 import Paginado from './Paginado';
 import SearchBar from "./SearchBar";
 
@@ -11,13 +12,27 @@ export function Home(){
   const dispatch = useDispatch();
 
   const [render, setRender] = useState('')
+  let flag;
   
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);  // 1
   const [countriesPerPage, setCountriesPerPage] = useState(10);   // 10
   const indexOfLastCountry = currentPage * countriesPerPage;  // 2 * 10 = 20
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;  // 20 - 10 = 10
-  const currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry); // 10 a 20 -> 10 a 19
+  let currentCountries;
+  if(typeof allCountries === 'string') {
+    currentCountries = allCountries;
+  } else {
+    currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry); // 10 a 20 -> 10 a 19
+  }
+    
+  // {
+  //   currentCountries && currentCountries.map((el) => {
+  //     return (
+  //       <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
+  //     )
+  //   })
+  // }
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -70,12 +85,13 @@ export function Home(){
         <option value="Oceania">Oceania</option>
         <option value="South America">South America</option>
       </select>
+      
       {
-        currentCountries && currentCountries.map((el) => {
-          return (
-            <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
-          )
-        })
+        typeof currentCountries === 'string' ? <Error msg={currentCountries} /> : currentCountries.map((el) => {
+              return (
+                <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
+              )
+            })
       }
       <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
     </div>
