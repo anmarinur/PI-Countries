@@ -93,7 +93,9 @@ export function Home(){
               )
             })
       }
-      <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
+      {
+        typeof currentCountries === 'string' ? <div></div> : <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
+      }
     </div>
   )
 
