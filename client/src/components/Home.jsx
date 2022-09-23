@@ -33,6 +33,10 @@ export function Home(){
     dispatch(getCountries())
   }, [dispatch]);
 
+  function handlerClickHome(e) {
+    dispatch(getCountries())
+  }
+
   function handlerFilterContinent(e){
     e.preventDefault();
     dispatch(filterCountryByContinent(e.target.value));
@@ -57,6 +61,7 @@ export function Home(){
   return (
     <div>
       <SearchBar />
+      <button onClick={(e) => handlerClickHome(e)}>Home</button>
       <div>
         <h3>Order by name</h3>
         <select onChange={(e) => handlerOrderByName(e)}>
