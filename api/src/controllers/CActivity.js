@@ -32,4 +32,17 @@ const postActivity = async function(req, res, next) {
 
 }
 
-module.exports = postActivity;
+const getActivities = async function(req, res, next) {
+  try {
+    const activities = await Activity.findAll({
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    })
+    res.json(activities)
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { postActivity, getActivities };
