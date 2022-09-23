@@ -1,8 +1,9 @@
-import { FILTER_BY_CONTINENTS, GET_COUNTRIES, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION } from "../types";
+import { FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION, POST_ACTIVITY } from "../types";
 
 const initialState = {
   countries: [],
-  countriesBackUp: []
+  countriesBackUp: [],
+  activities: []
 }
 
 function rootReducer(state = initialState, action){
@@ -18,6 +19,15 @@ function rootReducer(state = initialState, action){
         ...state,
         countries: action.payload,
         countriesBackUp: action.payload
+      }
+    case GET_ACTIVITIES:
+      return {
+        ...state,
+        activities: action.payload
+      }
+    case POST_ACTIVITY:
+      return {
+        ...state
       }
     case FILTER_BY_CONTINENTS:
       const allCountries = state.countriesBackUp;

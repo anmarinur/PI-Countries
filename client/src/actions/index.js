@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FILTER_BY_CONTINENTS, GET_COUNTRIES, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION } from '../types';
+import { FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION } from '../types';
 
 
 export function getCountries() {
@@ -23,6 +23,23 @@ export function getNameCountries(name) {
     } catch (error) {
       console.log(error);
     }
+  }
+}
+
+export function getActivities() {
+  return async function(dispatch) {
+    let json = await axios.get("http://localhost:3001/activities");
+    return dispatch({
+      type: GET_ACTIVITIES,
+      payload: json.data
+    })
+  }
+}
+
+export function postActivity(payload) {
+  return async function(dispatch) {
+    let json = await axios.post("http://localhost:3001/activities", payload);
+    return json;
   }
 }
 
