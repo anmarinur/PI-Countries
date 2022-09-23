@@ -37,22 +37,22 @@ function rootReducer(state = initialState, action){
         countries: statusFiltered
       }
     case ORDER_BY_NAME:
-      let arraySortedName = action.payload === 'ascName' ? 
+      let arraySortedName = action.payload === 'descName' ? 
         state.countries.sort((a, b) => {
           if (a.name > b.name) {
-            return 1;
+            return -1;
           }
           if (a.name < b.name) {
-            return -1;
+            return 1;
           }
           return 0;
         }) :
         state.countries.sort((a, b) => {
           if (a.name > b.name) {
-            return -1;
+            return 1;
           }
           if (a.name < b.name) {
-            return 1;
+            return -1;
           }
           return 0;
         });
@@ -61,22 +61,22 @@ function rootReducer(state = initialState, action){
         countries: arraySortedName
       }
     case ORDER_BY_POPULATION:
-      let arraySortedPop = action.payload === 'ascPop' ?
+      let arraySortedPop = action.payload === 'descPop' ?
         state.countries.sort((a, b) => {
           if (a.population > b.population) {
-            return 1;
+            return -1;
           }
           if (a.population < b.population) {
-            return -1;
+            return 1;
           }
           return 0;
         }) : 
         state.countries.sort((a, b) => {
           if (a.population > b.population) {
-            return -1;
+            return 1;
           }
           if (a.population < b.population) {
-            return 1;
+            return -1;
           }
           return 0;
         });

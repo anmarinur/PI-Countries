@@ -11,8 +11,7 @@ export function Home(){
   const allCountries = useSelector((state) => state.countries)
   const dispatch = useDispatch();
 
-  const [render, setRender] = useState('')
-  let flag;
+  const [render, setRender] = useState('');
   
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);  // 1
@@ -26,14 +25,6 @@ export function Home(){
     currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry); // 10 a 20 -> 10 a 19
   }
     
-  // {
-  //   currentCountries && currentCountries.map((el) => {
-  //     return (
-  //       <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
-  //     )
-  //   })
-  // }
-
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   }
@@ -46,7 +37,7 @@ export function Home(){
     e.preventDefault();
     dispatch(filterCountryByContinent(e.target.value));
     setCurrentPage(1);
-    setRender(`Actualizado por ${e.target.value}`)
+    setRender(`Actualizado por ${e.target.value}`);
   }
 
   function handlerOrderByName(e){
@@ -66,16 +57,22 @@ export function Home(){
   return (
     <div>
       <SearchBar />
-      <select onChange={(e) => handlerOrderByName(e)}>
-        <option>By Name</option>
-        <option value="ascName">Ascendent</option>
-        <option value="descName">Descendent</option>
-      </select>
-      <select onChange={(e) => handlerOrderByPopulation(e)}>
-        <option>By Population</option>
-        <option value="ascPop">Ascendent</option>
-        <option value="descPop">Descendent</option>
-      </select>
+      <div>
+        <h3>Order by name</h3>
+        <select onChange={(e) => handlerOrderByName(e)}>
+          <option>-</option>
+          <option value="ascName">Ascendent</option>
+          <option value="descName">Descendent</option>
+        </select>
+      </div>
+      <div>
+        <h3>Order by Population</h3>
+        <select onChange={(e) => handlerOrderByPopulation(e)}>
+          <option>-</option>
+          <option value="ascPop">Ascendent</option>
+          <option value="descPop">Descendent</option>
+        </select>
+      </div>
       <select onChange={(e) => handlerFilterContinent(e)}>
         <option value="All">All</option>
         <option value="Africa">Africa</option>

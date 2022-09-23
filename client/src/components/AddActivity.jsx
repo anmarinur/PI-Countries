@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getActivities } from '../actions';
 
 export default function AddActivity() {
@@ -17,7 +17,7 @@ export default function AddActivity() {
 
   useEffect(() => {
     dispatch(getActivities())
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
