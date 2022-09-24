@@ -1,47 +1,43 @@
 .component {
-  display: flex;
-  background: black;
-  min-width: 100%;
-  min-height: 100%;
-}
-
-.video {
   margin: 0;
   padding: 0;
-  width: 30%;
+  width: 100vw;
+  height: 100vh;
 }
 
-.text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-family: 'Reem Kufi Ink', sans-serif;
-  width: 70%;
+.image {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .headers {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 50%;
+  color: white;
+  font-family: 'Reem Kufi Ink', sans-serif;
 }
 
 .h1 {
-  min-width: 100%;
+  position: relative;
+  top: 20px;
   font-size: 200px;
-  margin: 0 auto -50px auto;
-  padding-bottom: 0;
+  margin-bottom: 0;
+  padding: 0 0 0 60px;
 }
 
 .h2 {
+  position: relative;
+  top: 10px;
   font-size: 70px;
-  margin-top: 0;
-  padding-top: 0;
+  padding-left: 70px;
 }
 
 .button {
+  position: fixed;
+  right: 150px;
+  bottom: 150px;
   background-color: white;
   width: 200px;
   height: 80px;
