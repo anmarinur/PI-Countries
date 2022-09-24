@@ -25,6 +25,15 @@
   font-size: 200px;
   margin-bottom: 0;
   padding: 0 0 0 60px;
+  transition: 0.5s;
+}
+
+.h1:hover {
+  /* color: rgb(0, 195, 255); */
+  text-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
 }
 
 .h2 {
