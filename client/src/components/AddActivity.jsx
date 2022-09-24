@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivities } from '../actions';
+import { getActivities, postActivity } from '../actions';
 
 export default function AddActivity() {
   const dispatch = useDispatch();
-  const activities = useSelector((state) => state.activities);
+  const history = useHistory();
+  const countries = useSelector((state) => state.countriesBackUp);
 
   const [input, setInput] = useState({
     name: '',
@@ -15,6 +16,47 @@ export default function AddActivity() {
     countries: []
   })
 
+  function handleChange(e) {
+    e.preventDefault();
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  function handleCheck(e) {
+    e.preventDefault();
+    if (e.target.checked) {
+      setInput({
+        ...input,
+        season: e.target.value
+      })
+    }
+  }
+
+  function handleSelect(e) {
+    e.preventDefault();
+    setInput({
+      ...input,
+      countries: [...input.countries, e.target.value]
+    })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(input)
+    dispatch(postActivity(input));
+    alert("Actividad creada correctamente");
+    setInput({
+      name: '',
+      difficulty: 0,
+      duration: 0,
+      season: '',
+      countries: []
+    });
+    history.push('/home');
+  }
+
   useEffect(() => {
     dispatch(getActivities())
   }, [dispatch]);
@@ -23,23 +65,37 @@ export default function AddActivity() {
     <div>
       <Link to="/home"><button>Home</button></Link>
       <h1>Add activities</h1>
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div>
           <label>Name:</label>
-          <input type="text" value={input.name} placeholder="Name..." name="name"></input>
+          <input type="text" value={input.name} placeholder="Name..." name="name" onChange={(e) => handleChange(e)}></input>
         </div>
         <div>
           <label>Difficulty:</label>
-          <input type="number" value={input.difficulty} placeholder="Difficulty..." name="difficulty"></input>
+          <input type="number" value={input.difficulty} placeholder="Difficulty..." name="difficulty" onChange={(e) => handleChange(e)}></input>
         </div>
         <div>
           <label>Duration:</label>
-          <input type="number" value={input.duration} placeholder="Duration..." name="duration"></input>
+          <input type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)}></input>
         </div>
         <div>
           <label>Season:</label>
-          <input type="text" value={input.season} placeholder="Season..." name="season"></input>
+          <label><input type="checkbox" value="Verano" name="Verano" onChange={(e) => handleCheck(e)}></input> Verano</label>
+          <label><input type="checkbox" value="Otoño" name="Otoño" onChange={(e) => handleCheck(e)}></input> Otoño</label>
+          <label><input type="checkbox" value="Invierno" name="Invierno" onChange={(e) => handleCheck(e)}></input> Invierno</label>
+          <label><input type="checkbox" value="Primavera" name="Primavera" onChange={(e) => handleCheck(e)}></input> Primavera</label>
         </div>
+        <select onChange={(e) => handleSelect(e)}>
+        {
+          countries.map((el) => {
+            return (
+              <option value={el.id}>{el.name}</option>
+            )
+          })
+        }
+        </select>
+        <ul><li>{input.countries.map(el => el + ', ')}</li></ul>
+        <button type="submit">Agregar</button>
       </form>
     </div>
   )

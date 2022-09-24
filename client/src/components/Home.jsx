@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from 'react-router-dom';
 import { getCountries, filterCountryByContinent, orderByName, orderByPopulation } from "../actions";
 import Card from './Card';
 import Error from "./Error";
@@ -61,6 +62,7 @@ export function Home(){
   return (
     <div>
       <SearchBar />
+      <Link to='/activities'><button>Agregar actividad</button></Link>
       <button onClick={(e) => handlerClickHome(e)}>Home</button>
       <div>
         <h3>Order by name</h3>
