@@ -105,3 +105,8 @@ dist
 
 # package-lock.json
 package-lock.json
+
+# media
+./client/src/assets/
+.jpg
+.mp4
