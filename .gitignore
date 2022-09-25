@@ -107,6 +107,5 @@ dist
 package-lock.json
 
 # media
-./client/src/assets/
-.jpg
+*.jpg
 *.mp4
