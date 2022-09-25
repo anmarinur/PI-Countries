@@ -109,4 +109,4 @@ package-lock.json
 # media
 ./client/src/assets/
 .jpg
-.mp4
+*.mp4
