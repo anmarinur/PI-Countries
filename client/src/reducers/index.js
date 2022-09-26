@@ -22,6 +22,7 @@ function rootReducer(state = initialState, action){
           countriesBackUp: action.payload
         }
         case GET_ACTIVITIES:
+          console.log('entré a pedir actividades')
           return {
             ...state,
             activities: action.payload

@@ -31,7 +31,7 @@ export default function AddActivity() {
     e.preventDefault();
     setInput({
       ...input,
-      [e.target.name]: e.target.value
+      [e.target.name]: typeof e.target.value === 'string' ? e.target.value.toLowerCase() : e.target.value
     })
     setErrors(validate({
       ...input,

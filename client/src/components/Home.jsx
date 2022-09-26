@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom';
-import { getCountries, filterCountryByContinent, orderByName, orderByPopulation } from "../actions";
+import { getCountries, filterCountryByContinent, orderByName, orderByPopulation, getActivities } from "../actions";
 import Card from './Card';
 import Error from "./Error";
 import Paginado from './Paginado';
@@ -12,8 +12,10 @@ import image from '../assets/static_background.jpg'
 export function Home(){
 
   const allCountries = useSelector((state) => state.countries);
-  const allActivities = useSelector((state) => state.activites);
+  const allActivities = useSelector((state) => state.activities);
   const dispatch = useDispatch();
+  let arrayActivities = [];
+  let filterActivities = [];
 
   const [render, setRender] = useState('');
   
@@ -35,6 +37,7 @@ export function Home(){
 
   useEffect(() => {
     dispatch(getCountries())
+    dispatch(getActivities())
   }, [dispatch]);
 
   function handlerClickHome(e) {
@@ -98,8 +101,27 @@ export function Home(){
             </select>
           </div>
           <div>
+            <h3>Filter by Activities</h3>
             <select>
+              <option>-</option>
+              {
+                arrayActivities = allActivities ? allActivities.map((activity) => activity.name[0].toUpperCase() + activity.name.substring(1).toLowerCase()) : []
+              }
+              {
+                arrayActivities.forEach((el) => {
+                  if(!filterActivities.includes(el)) {
+                    filterActivities.push(el)
+                  }
+                })
+              }
+              {
+                filterActivities.map((activity) => {
 
+                  return (
+                    <option value={activity}>{activity}</option>
+                  )
+                })
+              }
             </select>
           </div>
           <button onClick={(e) => handlerClickHome(e)}>Reset</button>
@@ -108,7 +130,7 @@ export function Home(){
           {
             typeof currentCountries === 'string' ? <Error msg={currentCountries} /> : currentCountries.map((el) => {
                   return (
-                    <Link  style={{ textDecoration: 'none' }}to={'/home/' + el.id}>
+                    <Link  style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
                       <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
                     </Link>
                   )

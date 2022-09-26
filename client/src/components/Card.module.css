@@ -23,7 +23,7 @@
   margin: 10px auto;  
 }
 
-.h3, .h4 {
+.h3, .h4, .h5 {
   text-decoration: none;
   font-family: 'Reem Kufi Ink', sans-serif;
   color: white;
@@ -35,5 +35,9 @@
 
 .h4 {
   font-size: 25px;
+}
+
+.h5 {
+  font-size: 15px;
 }
 
