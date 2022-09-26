@@ -14,8 +14,6 @@ export function Home(){
   const allCountries = useSelector((state) => state.countries);
   const allActivities = useSelector((state) => state.activities);
   const dispatch = useDispatch();
-  let arrayActivities = [];
-  let filterActivities = [];
 
   const [render, setRender] = useState('');
   
@@ -103,19 +101,9 @@ export function Home(){
           <div>
             <h3>Filter by Activities</h3>
             <select>
-              <option>-</option>
+              <option>All</option>
               {
-                arrayActivities = allActivities ? allActivities.map((activity) => activity.name[0].toUpperCase() + activity.name.substring(1).toLowerCase()) : []
-              }
-              {
-                arrayActivities.forEach((el) => {
-                  if(!filterActivities.includes(el)) {
-                    filterActivities.push(el)
-                  }
-                })
-              }
-              {
-                filterActivities.map((activity) => {
+                allActivities.map((activity) => {
 
                   return (
                     <option value={activity}>{activity}</option>

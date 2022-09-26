@@ -1,9 +1,10 @@
-import { FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION, POST_ACTIVITY } from "../types";
+import { FILTER_BY_ACTIVITIES, FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION, POST_ACTIVITY } from "../types";
 
 const initialState = {
   countries: [],
   countriesBackUp: [],
   activities: [],
+  activitiesBackUp: [],
   country: []
 }
 
@@ -22,10 +23,18 @@ function rootReducer(state = initialState, action){
           countriesBackUp: action.payload
         }
         case GET_ACTIVITIES:
-          console.log('entré a pedir actividades')
+          const arrayActivities = action.payload.map(el => el.name[0].toUpperCase() + el.name.substring(1).toLowerCase());
+          console.log(arrayActivities)
+          const arrayFilterd = []; 
+          arrayActivities.forEach((el) => {
+            if(!arrayFilterd.includes(el)) {
+              arrayFilterd.push(el)
+            }
+          })
           return {
             ...state,
-            activities: action.payload
+            activities: arrayFilterd,
+            activitiesBackUp: arrayFilterd
           }
           case POST_ACTIVITY:
             return {
@@ -91,8 +100,13 @@ function rootReducer(state = initialState, action){
                       ...state,
                       country: action.payload
                     }
-                    default:
-                      return state;  
+                    case FILTER_BY_ACTIVITIES:
+                      return {
+                        ...state,
+                        activities: action.payload
+                      }
+                      default:
+                        return state;  
   }
 }
 

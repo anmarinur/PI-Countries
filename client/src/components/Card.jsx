@@ -6,7 +6,7 @@ export default function Card({name, continent, flagImg}) {
       <div className={style.contImg}>
         <img className={style.flag} src={flagImg} alt="flag"/>
       </div>
-      <h3 className={name.length > 18 ? style.h5 : style.h3}>{name}</h3>
+      <h3 className={name.length > 22 ? style.h5 : style.h3}>{name}</h3>
       <h4 className={style.h4}>{continent}</h4>
     </div>
   )
