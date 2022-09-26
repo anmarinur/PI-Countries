@@ -41,12 +41,10 @@ export default function AddActivity() {
   }
 
   function handleCheck(e) {
-    if (e.target.checked) {
-      setInput({
-        ...input,
-        season: e.target.value
-      })
-    }
+    setInput({
+      ...input,
+      season: e.target.value
+    })
   }
 
   function handleSelect(e) {
@@ -105,10 +103,10 @@ export default function AddActivity() {
         </div>
         <div>
           <label>Season:</label>
-          <label><input type="checkbox" value="Verano" name="Verano" onChange={(e) => handleCheck(e)}/> Verano</label>
-          <label><input type="checkbox" value="Otoño" name="Otoño" onChange={(e) => handleCheck(e)}/> Otoño</label>
-          <label><input type="checkbox" value="Invierno" name="Invierno" onChange={(e) => handleCheck(e)}/> Invierno</label>
-          <label><input type="checkbox" value="Primavera" name="Primavera" onChange={(e) => handleCheck(e)}/> Primavera</label>
+          <label><input  type="radio" value="Verano" name="seasons" onChange={(e) => handleCheck(e)}/> Verano</label>
+          <label><input  type="radio" value="Otoño" name="seasons" onChange={(e) => handleCheck(e)}/> Otoño</label>
+          <label><input  type="radio" value="Invierno" name="seasons" onChange={(e) => handleCheck(e)}/> Invierno</label>
+          <label><input  type="radio" value="Primavera" name="seasons" onChange={(e) => handleCheck(e)}/> Primavera</label>
         </div>
         <select onChange={(e) => handleSelect(e)}>
         {
