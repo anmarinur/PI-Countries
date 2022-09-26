@@ -93,7 +93,9 @@ export function Home(){
       {
         typeof currentCountries === 'string' ? <Error msg={currentCountries} /> : currentCountries.map((el) => {
               return (
-                <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
+                <Link to={'/home/' + el.id}>
+                  <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
+                </Link>
               )
             })
       }
