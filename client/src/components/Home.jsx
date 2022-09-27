@@ -19,15 +19,32 @@ export function Home(){
   
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);  // 1
-  const [countriesPerPage, setCountriesPerPage] = useState(10);   // 10
-  const indexOfLastCountry = currentPage * countriesPerPage;  // 2 * 10 = 20
-  const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;  // 20 - 10 = 10
-  let currentCountries;
-  if(typeof allCountries === 'string') {
-    currentCountries = allCountries;
+  let countriesPerPage = '';  // 'various'
+  let currentCountries;       // Null
+
+  if (allCountries.length - 9 <= 0) {
+    countriesPerPage = 'one';
   } else {
-    currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry); // 10 a 20 -> 10 a 19
+    countriesPerPage = 'various';
   }
+
+  if (countriesPerPage === 'one') {
+    currentCountries = allCountries;
+  } else if (countriesPerPage === 'various') {
+    if (currentPage === 1) {
+      currentCountries = allCountries.slice(0, 9)
+    } else {
+      const indexOfLastCountry = currentPage * 10 - 1;  // 19
+      const indexOfFirstCountry = indexOfLastCountry - 10;  // 19 - 10 = 9
+      currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry);
+    }
+  }
+
+  // if(typeof allCountries === 'string') {
+  //   currentCountries = allCountries;
+  // } else {
+  //   currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry); // 10 a 20 -> 10 a 19
+  // }
     
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
