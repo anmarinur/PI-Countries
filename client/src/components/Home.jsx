@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom';
-import { getCountries, filterCountryByContinent, orderByName, orderByPopulation, getActivities } from "../actions";
+import { getCountries, filterCountryByContinent, orderByName, orderByPopulation, getActivities, filterByActivities } from "../actions";
 import Card from './Card';
 import Error from "./Error";
 import Paginado from './Paginado';
@@ -64,7 +64,13 @@ export function Home(){
     e.preventDefault();
     dispatch(filterCountryByContinent(e.target.value));
     setCurrentPage(1);
-    setRender(`Actualizado por ${e.target.value}`);
+    // setRender(`Actualizado por ${e.target.value}`);
+  }
+
+  function handlerFilterActivity(e) {
+    e.preventDefault();
+    dispatch(filterByActivities(e.target.value));
+    setCurrentPage(1);
   }
 
   function handlerOrderByName(e){
@@ -119,8 +125,8 @@ export function Home(){
           </div>
           <div>
             <h3>Filter by Activities</h3>
-            <select>
-              <option>All</option>
+            <select onChange={(e) => handlerFilterActivity(e)}>
+              <option value="All">All</option>
               {
                 allActivities.map((activity) => {
 

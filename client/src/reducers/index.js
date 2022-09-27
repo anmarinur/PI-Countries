@@ -4,7 +4,6 @@ const initialState = {
   countries: [],
   countriesBackUp: [],
   activities: [],
-  activitiesBackUp: [],
   country: []
 }
 
@@ -24,7 +23,6 @@ function rootReducer(state = initialState, action){
         }
         case GET_ACTIVITIES:
           const arrayActivities = action.payload.map(el => el.name[0].toUpperCase() + el.name.substring(1).toLowerCase());
-          console.log(arrayActivities)
           const arrayFilterd = []; 
           arrayActivities.forEach((el) => {
             if(!arrayFilterd.includes(el)) {
@@ -33,8 +31,7 @@ function rootReducer(state = initialState, action){
           })
           return {
             ...state,
-            activities: arrayFilterd,
-            activitiesBackUp: arrayFilterd
+            activities: arrayFilterd
           }
           case POST_ACTIVITY:
             return {
@@ -102,7 +99,14 @@ function rootReducer(state = initialState, action){
                     }
                     case FILTER_BY_ACTIVITIES:
                       const allCountriesBackUp = state.countriesBackUp;
-                      const countriesFiltered = action.payload === 'All' ? allCountriesBackUp : allCountriesBackUp.filter(el => el.activities.include(action.payload))
+                      const countriesFiltered  = (action.payload === 'All') ? allCountriesBackUp : 
+                        allCountriesBackUp.filter(el => el.Activities.length > 0 && el.Activities.map((activity) => {
+                          if (activity.name === action.payload) {
+                            return true;
+                          }
+                        })
+                      )
+                      console.log(countriesFiltered);
                       return {
                         ...state,
                         countries: countriesFiltered
