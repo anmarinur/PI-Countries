@@ -1,17 +1,17 @@
 import style from './Paginado.module.css'
 
-export default function Paginado({countriesPerPage, allCountries, paginado}) {
+export default function Paginado({statusPages, allCountries, paginado}) {
   const pageNumbers = [];
+  const countriesPageOne = 9;
+  const countriesPerPage = 10;
 
-  if (countriesPerPage === 'one') {
+  if (statusPages === 'one') {
     pageNumbers.push(1);
   } else {
-    for (let i = 1; i <= Math.ceil(((allCountries - 9)/10)+1); i++) {
+    for (let i = 1; i <= Math.ceil(((allCountries - countriesPageOne)/countriesPerPage)+1); i++) {
       pageNumbers.push(i);
     }
   }
-
-  
 
   return (
     <nav>

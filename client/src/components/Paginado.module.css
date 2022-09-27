@@ -8,3 +8,8 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.button:focus {
+  box-shadow: 0 0 5px white,
+              0 0 20px white;
+}

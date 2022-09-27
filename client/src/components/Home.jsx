@@ -19,32 +19,29 @@ export function Home(){
   
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);  // 1
-  let countriesPerPage = '';  // 'various'
+  let statusPages = '';  // 'various'
   let currentCountries;       // Null
+  const countriesPageOne = 9;
+  const countriesPerPage = 10;
 
-  if (allCountries.length - 9 <= 0) {
-    countriesPerPage = 'one';
+
+  if (allCountries.length - countriesPageOne <= 0) {
+    statusPages = 'one';
   } else {
-    countriesPerPage = 'various';
+    statusPages = 'various';
   }
 
-  if (countriesPerPage === 'one') {
+  if (statusPages === 'one') {
     currentCountries = allCountries;
-  } else if (countriesPerPage === 'various') {
+  } else if (statusPages === 'various') {
     if (currentPage === 1) {
-      currentCountries = allCountries.slice(0, 9)
+      currentCountries = allCountries.slice(0, countriesPageOne);
     } else {
-      const indexOfLastCountry = currentPage * 10 - 1;  // 19
-      const indexOfFirstCountry = indexOfLastCountry - 10;  // 19 - 10 = 9
+      const indexOfLastCountry = currentPage * countriesPerPage - 1;  // 19
+      const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;  // 19 - 10 = 9
       currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry);
     }
   }
-
-  // if(typeof allCountries === 'string') {
-  //   currentCountries = allCountries;
-  // } else {
-  //   currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry); // 10 a 20 -> 10 a 19
-  // }
     
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -144,7 +141,7 @@ export function Home(){
         </div>
         <div className={style.pages}>
           {
-            typeof currentCountries === 'string' ? <div></div> : <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
+            typeof currentCountries === 'string' ? <div></div> : <Paginado statusPages={statusPages} allCountries={allCountries.length} paginado={paginado} />
           }
         </div>
       </div>
