@@ -25,7 +25,10 @@ const getCountry = async (req, res, next) => {
         });
       });
       const allCountriesFront = await Country.findAll({
-        attributes: ['id', 'flagImg', 'name', 'continent', 'population']
+        attributes: ['id', 'flagImg', 'name', 'continent', 'population'],
+        include: {
+          model: Activity,
+        }
       });
       res.json(allCountriesFront);
             
