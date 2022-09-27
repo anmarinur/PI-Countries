@@ -52,8 +52,12 @@ export function Home(){
     dispatch(getActivities())
   }, [dispatch]);
 
-  function handlerClickHome(e) {
+  function handlerClickReset(e) {
     dispatch(getCountries())
+  }
+
+  function handlerClickHome(e) {
+    setCurrentPage(1);
   }
 
   function handlerFilterContinent(e){
@@ -82,6 +86,7 @@ export function Home(){
       <img className={style.imgbg} src={image} alt="background"/>
       <div className={style.blur}>
         <div className={style.header}>
+          <button onClick={(e) => handlerClickHome(e)}>Home</button>
           <SearchBar />
           <Link to='/activities'><button>Add activity</button></Link>
           <div>
@@ -126,7 +131,7 @@ export function Home(){
               }
             </select>
           </div>
-          <button onClick={(e) => handlerClickHome(e)}>Reset</button>
+          <button onClick={(e) => handlerClickReset(e)}>Reset</button>
         </div>
         <div className={style.cards}>
           {

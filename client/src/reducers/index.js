@@ -101,9 +101,11 @@ function rootReducer(state = initialState, action){
                       country: action.payload
                     }
                     case FILTER_BY_ACTIVITIES:
+                      const allCountriesBackUp = state.countriesBackUp;
+                      const countriesFiltered = action.payload === 'All' ? allCountriesBackUp : allCountriesBackUp.filter(el => el.activities.include(action.payload))
                       return {
                         ...state,
-                        activities: action.payload
+                        countries: countriesFiltered
                       }
                       default:
                         return state;  
