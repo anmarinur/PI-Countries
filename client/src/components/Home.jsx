@@ -137,7 +137,7 @@ export function Home(){
               }
             </select>
           </div>
-          <button onClick={(e) => handlerClickReset(e)}>Reset</button>
+          <button onClick={(e) => handlerClickReset(e)}>Reload</button>
         </div>
         <div className={style.cards}>
           {
