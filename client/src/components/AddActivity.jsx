@@ -26,16 +26,21 @@ export default function AddActivity() {
     countries: []
   })
   const [errors, setErrors] = useState({});
+  let flag = 'false';
 
   function validate(input) {
     if (!input.name) {
       errors.name = 'Se requiere un nombre';
     } else if (activities.includes(input.name)) {
       errors.name = 'Actividad ya registrada'
-    } else if (!input.season) {
+    } else {
+      errors.name = '';
+    }
+    
+    
+    if (!input.season) {
       errors.season = 'Elija al menos una estación del año'
     }
-    console.log(errors)
     return errors;
   }
 
@@ -130,7 +135,12 @@ export default function AddActivity() {
         }
         </select>
         {/* <ul><li>{input.countries.map(el => el + ', ')}</li></ul> */}
-        <button type="submit">Agregar</button>
+        {
+          errors ? flag = 'true' : flag = 'false'
+        }
+        {
+          <button type="submit" disabled={flag ? "true" : "false"}>Agregar</button>
+        }
       </form>
       {
         input.countries.map( el => {
