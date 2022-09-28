@@ -3,20 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivities, postActivity } from '../actions';
 
-function validate(input) {
-  let errors = {};
-  if (!input.name) {
-    errors.name = 'Se requiere un nombre';
-  } else if (!input.season) {
-    errors.season = 'Elija al menos una estación del año'
-  }
-  return errors;
-}
-
 export default function AddActivity() {
   const dispatch = useDispatch();
   const history = useHistory();
   const countries = useSelector((state) => state.countriesBackUp);
+  const activities = useSelector((state) => state.activities)
   const countriesOrdered = countries.sort((a, b) => {
     if (a.name > b.name) {
       return 1;
@@ -35,6 +26,18 @@ export default function AddActivity() {
     countries: []
   })
   const [errors, setErrors] = useState({});
+
+  function validate(input) {
+    if (!input.name) {
+      errors.name = 'Se requiere un nombre';
+    } else if (activities.includes(input.name)) {
+      errors.name = 'Actividad ya registrada'
+    } else if (!input.season) {
+      errors.season = 'Elija al menos una estación del año'
+    }
+    console.log(errors)
+    return errors;
+  }
 
   function handleChange(e) {
     e.preventDefault();
@@ -66,7 +69,6 @@ export default function AddActivity() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input)
     dispatch(postActivity(input));
     alert("Actividad creada correctamente");
     setInput({
@@ -118,6 +120,7 @@ export default function AddActivity() {
           <label><input  type="radio" value="Primavera" name="seasons" onChange={(e) => handleCheck(e)}/> Primavera</label>
         </div>
         <select onChange={(e) => handleSelect(e)}>
+          <option>Select countries</option>
         {
           countriesOrdered.map((el) => {
             return (
