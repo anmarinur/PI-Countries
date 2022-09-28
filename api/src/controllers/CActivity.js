@@ -25,6 +25,9 @@ const getActivities = async function(req, res, next) {
     const activities = await Activity.findAll({
       attributes: {
         exclude: ['createdAt', 'updatedAt']
+      },
+      include: {
+        model: Country
       }
     })
     res.json(activities)
