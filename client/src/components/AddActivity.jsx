@@ -17,6 +17,15 @@ export default function AddActivity() {
   const dispatch = useDispatch();
   const history = useHistory();
   const countries = useSelector((state) => state.countriesBackUp);
+  const countriesOrdered = countries.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
 
   const [input, setInput] = useState({
     name: '',
@@ -110,7 +119,7 @@ export default function AddActivity() {
         </div>
         <select onChange={(e) => handleSelect(e)}>
         {
-          countries.map((el) => {
+          countriesOrdered.map((el) => {
             return (
               <option value={el.id}>{el.name}</option>
             )
