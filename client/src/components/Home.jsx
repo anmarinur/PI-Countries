@@ -131,7 +131,7 @@ export function Home(){
                 allActivities.map((activity) => {
 
                   return (
-                    <option value={activity}>{activity}</option>
+                    <option value={activity}>{activity[0].toUpperCase() + activity.substring(1).toLowerCase()}</option>
                   )
                 })
               }

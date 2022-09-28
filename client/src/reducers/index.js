@@ -4,6 +4,7 @@ const initialState = {
   countries: [],
   countriesBackUp: [],
   activities: [],
+  activitiesFull: [],
   country: []
 }
 
@@ -22,7 +23,7 @@ function rootReducer(state = initialState, action){
           countriesBackUp: action.payload
         }
         case GET_ACTIVITIES:
-          const arrayActivities = action.payload.map(el => el.name[0].toUpperCase() + el.name.substring(1).toLowerCase());
+          const arrayActivities = action.payload.map(el => el.name.toLowerCase());
           const arrayFilterd = []; 
           arrayActivities.forEach((el) => {
             if(!arrayFilterd.includes(el)) {
@@ -31,7 +32,8 @@ function rootReducer(state = initialState, action){
           })
           return {
             ...state,
-            activities: arrayFilterd
+            activities: arrayFilterd,
+            activitiesFull: action.payload
           }
           case POST_ACTIVITY:
             return {
@@ -98,18 +100,14 @@ function rootReducer(state = initialState, action){
                       country: action.payload
                     }
                     case FILTER_BY_ACTIVITIES:
-                      const allCountriesBackUp = state.countriesBackUp;
-                      const countriesFiltered  = (action.payload === 'All') ? allCountriesBackUp : 
-                        allCountriesBackUp.filter(el => el.Activities.length > 0 && el.Activities.map((activity) => {
-                          if (activity.name === action.payload) {
-                            return true;
-                          }
-                        })
-                      )
-                      console.log(countriesFiltered);
+                      const allCountriesCopy = state.countriesBackUp;
+                      const allActivitiesFull = state.activitiesFull;
+                      const allCountriesActivities = allCountriesCopy.filter((country) => country.Activities.length > 0);
+                      const activityFiltered = allActivitiesFull.filter((activity) => activity.name === action.payload);
+                      const countriesByActivity = action.payload === 'All' ? allCountriesActivities : activityFiltered[0].Countries
                       return {
                         ...state,
-                        countries: countriesFiltered
+                        countries: countriesByActivity
                       }
                       default:
                         return state;  
