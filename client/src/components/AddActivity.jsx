@@ -25,8 +25,8 @@ export default function AddActivity() {
     season: '',
     countries: []
   })
-  const [errors, setErrors] = useState({});
-  let flag = 'false';
+  const [errors, setErrors] = useState({
+  });
 
   function validate(input) {
     if (!input.name) {
@@ -36,11 +36,14 @@ export default function AddActivity() {
     } else {
       errors.name = '';
     }
-    
-    
+  
     if (!input.season) {
       errors.season = 'Elija al menos una estación del año'
+    } else {
+      errors.season = '';
     }
+
+    console.log(errors)
     return errors;
   }
 
@@ -54,14 +57,18 @@ export default function AddActivity() {
       ...input,
       [e.target.name]: e.target.value
     }))
-    console.log(errors)
   }
 
   function handleCheck(e) {
+    console.log('entré')
     setInput({
       ...input,
       season: e.target.value
     })
+    setErrors(validate({
+      ...input,
+      [e.target.name]: e.target.value
+    }))
   }
 
   function handleSelect(e) {
@@ -95,6 +102,10 @@ export default function AddActivity() {
 
   useEffect(() => {
     dispatch(getActivities())
+    setErrors({
+      name: 'Se requiere un nombre',
+      season: 'Elija al menos una estación del año'
+    })
   }, [dispatch]);
 
   return (
@@ -118,11 +129,14 @@ export default function AddActivity() {
           <input type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)}></input>
         </div>
         <div>
+          {errors.season && (
+            <p>{errors.season}</p>
+          )}
           <label>Season:</label>
-          <label><input  type="radio" value="Verano" name="seasons" onChange={(e) => handleCheck(e)}/> Verano</label>
-          <label><input  type="radio" value="Otoño" name="seasons" onChange={(e) => handleCheck(e)}/> Otoño</label>
-          <label><input  type="radio" value="Invierno" name="seasons" onChange={(e) => handleCheck(e)}/> Invierno</label>
-          <label><input  type="radio" value="Primavera" name="seasons" onChange={(e) => handleCheck(e)}/> Primavera</label>
+          <label><input  type="radio" value="Verano" name="season" onChange={(e) => handleCheck(e)}/> Verano</label>
+          <label><input  type="radio" value="Otoño" name="season" onChange={(e) => handleCheck(e)}/> Otoño</label>
+          <label><input  type="radio" value="Invierno" name="season" onChange={(e) => handleCheck(e)}/> Invierno</label>
+          <label><input  type="radio" value="Primavera" name="season" onChange={(e) => handleCheck(e)}/> Primavera</label>
         </div>
         <select onChange={(e) => handleSelect(e)}>
           <option>Select countries</option>
@@ -136,10 +150,7 @@ export default function AddActivity() {
         </select>
         {/* <ul><li>{input.countries.map(el => el + ', ')}</li></ul> */}
         {
-          errors ? flag = 'true' : flag = 'false'
-        }
-        {
-          <button type="submit" disabled={flag ? "true" : "false"}>Agregar</button>
+          <button type="submit" disabled={(errors.name || errors.season) ? true : ''}>Agregar</button>
         }
       </form>
       {
