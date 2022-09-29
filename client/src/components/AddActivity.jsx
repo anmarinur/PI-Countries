@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivities, postActivity } from '../actions';
+import image from '../assets/static_background.jpg';
+import style from './AddActivity.module.css'
 
 export default function AddActivity() {
   const dispatch = useDispatch();
@@ -25,8 +27,8 @@ export default function AddActivity() {
     season: '',
     countries: []
   })
-  const [errors, setErrors] = useState({
-  });
+  const [errors, setErrors] = useState({});
+  const [render, setRender] = useState('render')
 
   function validate(input) {
     if (!input.name) {
@@ -36,14 +38,31 @@ export default function AddActivity() {
     } else {
       errors.name = '';
     }
-  
+    
+    if(input.difficulty > 5 || input.difficulty < 1) {
+      errors.difficulty = 'Elija un valor entre 1 y 5'
+    } else {
+      errors.difficulty = '';
+    }
+
+    if(input.duration < 1 || input.duration > 50) {
+      errors.duration = 'Elija un valor entre 1 y 20'
+    } else {
+      errors.duration = '';
+    }
+
     if (!input.season) {
       errors.season = 'Elija al menos una estación del año'
     } else {
       errors.season = '';
     }
-
-    console.log(errors)
+    console.log(input.countries)
+    if(input.countries.length === 0) {
+      errors.countries = 'Elija al menos un país'
+    } else {
+      errors.countries = ''
+    }
+    console.log(errors.countries)
     return errors;
   }
 
@@ -72,11 +91,14 @@ export default function AddActivity() {
   }
 
   function handleSelect(e) {
-    e.preventDefault();
     setInput({
       ...input,
       countries: [...input.countries, e.target.value]
     })
+    setErrors(validate({
+      ...input,
+      [e.target.name]: e.target.value
+    }))
   }
 
   function handleSubmit(e) {
@@ -104,65 +126,82 @@ export default function AddActivity() {
     dispatch(getActivities())
     setErrors({
       name: 'Se requiere un nombre',
-      season: 'Elija al menos una estación del año'
+      difficulty: 'Elija un valor entre 1 y 5',
+      duration: 'Elija un valor entre 1 y 20',
+      season: 'Elija al menos una estación del año',
+      countries: 'Elija al menos un país'
     })
   }, [dispatch]);
 
   return (
     <div>
-      <Link to="/home"><button>Home</button></Link>
-      <h1>Add activities</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
-          <label>Name:</label>
-          <input type="text" value={input.name} placeholder="Name..." name="name" onChange={(e) => handleChange(e)}/>
+      <img className={style.imgbg} src={image} alt="background"/>
+      <div className={style.blur}>
+        <div className={style.header}>
+          <Link to="/home"><button>Home</button></Link>
+          <h1>Add activities</h1>
         </div>
-        {errors.name && (
-          <p>{errors.name}</p>
-        )}
-        <div>
-          <label>Difficulty:</label>
-          <input type="number" value={input.difficulty} placeholder="Difficulty..." name="difficulty" onChange={(e) => handleChange(e)}/>
-        </div>
-        <div>
-          <label>Duration:</label>
-          <input type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)}></input>
-        </div>
-        <div>
-          {errors.season && (
-            <p>{errors.season}</p>
+        
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div>
+          {errors.name && (
+            <p>{errors.name}</p>
           )}
-          <label>Season:</label>
-          <label><input  type="radio" value="Verano" name="season" onChange={(e) => handleCheck(e)}/> Verano</label>
-          <label><input  type="radio" value="Otoño" name="season" onChange={(e) => handleCheck(e)}/> Otoño</label>
-          <label><input  type="radio" value="Invierno" name="season" onChange={(e) => handleCheck(e)}/> Invierno</label>
-          <label><input  type="radio" value="Primavera" name="season" onChange={(e) => handleCheck(e)}/> Primavera</label>
+            <label>Name:</label>
+            <input type="text" value={input.name} placeholder="Name..." name="name" onChange={(e) => handleChange(e)}/>
+          </div>
+          <div>
+            {errors.difficulty && (
+              <p>{errors.difficulty}</p>
+            )}
+            <label>Difficulty:</label>
+            <input type="number" value={input.difficulty} placeholder="Difficulty..." name="difficulty" onChange={(e) => handleChange(e)}/>
+          </div>
+          <div>
+            {errors.duration && (
+              <p>{errors.duration}</p>
+            )}
+            <label>Duration:</label>
+            <input type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)}></input>
+          </div>
+          <div>
+            {errors.season && (
+              <p>{errors.season}</p>
+            )}
+            <label>Season:</label>
+            <label><input  type="radio" value="Verano" name="season" onChange={(e) => handleCheck(e)}/> Verano</label>
+            <label><input  type="radio" value="Otoño" name="season" onChange={(e) => handleCheck(e)}/> Otoño</label>
+            <label><input  type="radio" value="Invierno" name="season" onChange={(e) => handleCheck(e)}/> Invierno</label>
+            <label><input  type="radio" value="Primavera" name="season" onChange={(e) => handleCheck(e)}/> Primavera</label>
+          </div>
+            {errors.countries && (
+              <p>{errors.countries}</p>
+            )}
+          <select onChange={(e) => {handleSelect(e)}}>
+            <option>Select countries</option>
+          {
+            countriesOrdered.map((el) => {
+              return (
+                <option value={el.id} name={el.name}>{el.name}</option>
+              )
+            })
+          }
+          </select>
+          {
+            <button type="submit" disabled={errors.name || errors.difficulty || errors.duration || errors.season || errors.countries ? true : ''}>Agregar</button>
+          }
+        </form>
+          {
+            input.countries.map( el => {
+              return (
+                <div>
+                  <p>{el}</p>
+                  <button onClick={() => handleDelete(el)}>x</button>
+                </div>
+              )
+            })
+          }
         </div>
-        <select onChange={(e) => handleSelect(e)}>
-          <option>Select countries</option>
-        {
-          countriesOrdered.map((el) => {
-            return (
-              <option value={el.id}>{el.name}</option>
-            )
-          })
-        }
-        </select>
-        {/* <ul><li>{input.countries.map(el => el + ', ')}</li></ul> */}
-        {
-          <button type="submit" disabled={(errors.name || errors.season) ? true : ''}>Agregar</button>
-        }
-      </form>
-      {
-        input.countries.map( el => {
-          return (
-            <div>
-              <p>{el}</p>
-              <button onClick={() => handleDelete(el)}>x</button>
-            </div>
-          )
-        })
-      }
-    </div>
+      </div>
   )
 }
