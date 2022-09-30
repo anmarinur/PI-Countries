@@ -142,7 +142,7 @@ export default function AddActivity() {
         
         <div className={style.body}>  
           <form onSubmit={(e) => handleSubmit(e)}>
-            <div>
+            <div className={style.contInputs}>
               <div className={style.nameError}>
                 <label>Name:</label>
                 {errors.name && <p className={style.error}>{errors.name}</p>}
@@ -150,20 +150,22 @@ export default function AddActivity() {
               <input className={style.input} type="text" value={input.name} placeholder="Name..." name="name" onChange={(e) => handleChange(e)} autoComplete='off'/>
             </div>
 
-            <div>
-              {errors.difficulty && (
-                <p>{errors.difficulty}</p>
-                )}
-              <label>Difficulty:</label>
-              <input type="number" value={input.difficulty} placeholder="Difficulty..." name="difficulty" onChange={(e) => handleChange(e)}/>
+            <div className={style.contInputs}>
+              <div className={style.nameError}>
+                <label>Difficulty:</label>
+                {errors.difficulty && <p className={style.error}>{errors.difficulty}</p>}
+              </div>
+              <input className={style.input} type="number" value={input.difficulty} placeholder="Difficulty..." name="difficulty" onChange={(e) => handleChange(e)} autoComplete='off'/>
             </div>
-            <div>
-              {errors.duration && (
-                <p>{errors.duration}</p>
-                )}
-              <label>Duration (hours):</label>
-              <input type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)}></input>
+
+            <div className={style.contInputs}>
+              <div className={style.nameError}>
+                <label>Duration (hours):</label>
+                {errors.duration && <p className={style.error}>{errors.duration}</p>}
+              </div>
+              <input className={style.input} type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)} autoComplete='off'></input>
             </div>
+
             <div>
               {errors.season && (
                 <p>{errors.season}</p>
