@@ -17,7 +17,9 @@
   backdrop-filter: blur(5px);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
+  font-family: 'Reem Kufi Ink', sans-serif;
 }
 
 .header {
@@ -27,5 +29,41 @@
   align-items: center;
   background-color: rgba(255, 255, 255, 0.3);
   height: 70px;
+  width: 100%;
   margin-top: 20px;
+  font-size: 20px;
+}
+
+.body{
+  
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background-color: rgba(3, 232, 244, 0.4);
+  width: 70%;
+  border-radius: 10px;
+}
+
+.nameError {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error {
+  color: rgb(255, 242, 0);
+  font-size: 20px;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(208, 253, 255);
+  padding: 12px 20px;
 }

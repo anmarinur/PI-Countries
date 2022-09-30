@@ -64,7 +64,6 @@ export function Home(){
     e.preventDefault();
     dispatch(filterCountryByContinent(e.target.value));
     setCurrentPage(1);
-    // setRender(`Actualizado por ${e.target.value}`);
   }
 
   function handlerFilterActivity(e) {
@@ -128,10 +127,9 @@ export function Home(){
             <select onChange={(e) => handlerFilterActivity(e)}>
               <option value="All">All</option>
               {
-                allActivities.map((activity) => {
-
+                allActivities.map((activity, i) => {
                   return (
-                    <option value={activity}>{activity[0].toUpperCase() + activity.substring(1).toLowerCase()}</option>
+                    <option key={i} value={activity}>{activity[0].toUpperCase() + activity.substring(1).toLowerCase()}</option>
                   )
                 })
               }
@@ -143,7 +141,7 @@ export function Home(){
           {
             typeof currentCountries === 'string' ? <Error msg={currentCountries} /> : currentCountries.map((el) => {
                   return (
-                    <Link  style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
+                    <Link key={el.id} style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
                       <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
                     </Link>
                   )
