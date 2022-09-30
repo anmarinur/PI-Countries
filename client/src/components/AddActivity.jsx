@@ -141,7 +141,7 @@ export default function AddActivity() {
         </div>
         
         <div className={style.body}>  
-          <form onSubmit={(e) => handleSubmit(e)}>
+          <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
             <div className={style.contInputs}>
               <div className={style.nameError}>
                 <label>Name:</label>
@@ -166,32 +166,40 @@ export default function AddActivity() {
               <input className={style.input} type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)} autoComplete='off'></input>
             </div>
 
-            <div>
-              {errors.season && (
-                <p>{errors.season}</p>
-                )}
-              <label>Season:</label>
-              <label><input  type="radio" value="Verano" name="season" onChange={(e) => handleCheck(e)}/> Verano</label>
-              <label><input  type="radio" value="Otoño" name="season" onChange={(e) => handleCheck(e)}/> Otoño</label>
-              <label><input  type="radio" value="Invierno" name="season" onChange={(e) => handleCheck(e)}/> Invierno</label>
-              <label><input  type="radio" value="Primavera" name="season" onChange={(e) => handleCheck(e)}/> Primavera</label>
+            <div className={style.contInputs}>
+              <div className={style.nameError}>
+                <label>Season:</label>
+                {errors.season && <p className={style.error}>{errors.season}</p>}
+              </div>
+              <div className={style.contRadios}>
+                <label><input className={style.inputRadio} type="radio" value="Verano" name="season" onChange={(e) => handleCheck(e)}/> Verano</label>
+                <label><input className={style.inputRadio} type="radio" value="Otoño" name="season" onChange={(e) => handleCheck(e)}/> Otoño</label>
+                <label><input className={style.inputRadio} type="radio" value="Invierno" name="season" onChange={(e) => handleCheck(e)}/> Invierno</label>
+                <label><input className={style.inputRadio} type="radio" value="Primavera" name="season" onChange={(e) => handleCheck(e)}/> Primavera</label>
+              </div>
             </div>
-              {errors.countries && (
-                <p>{errors.countries}</p>
-                )}
-            <select onChange={(e) => {handleSelect(e)}}>
-              <option>Select countries</option>
-            {
-              countriesOrdered.map((el) => {
-                return (
-                  <option key={el.id} value={el.id} name={el.name}>{el.name}</option>
-                  )
-                })
-              }
-            </select>
-            {
-              <button type="submit" disabled={errors.name || errors.difficulty || errors.duration || errors.season || errors.countries ? true : ''}>Agregar</button>
-            }
+            
+            <div className={style.contInputs}>
+              <div className={style.nameError}>
+                <label >Countries:</label>
+                {errors.countries && <p className={style.error}>{errors.countries}</p>}
+              </div>
+              <div className={style.contSelect}>
+                <select className={style.select} onChange={(e) => {handleSelect(e)}}>
+                <option>Select countries</option>
+                {
+                  countriesOrdered.map((el) => {
+                    return (
+                      <option key={el.id} value={el.id} name={el.name}>{el.name}</option>
+                    )
+                  })
+                }
+                </select>
+                {
+                  <button className={style.buttonSelect} type="submit" disabled={errors.name || errors.difficulty || errors.duration || errors.season || errors.countries ? true : ''}>Agregar</button>
+                }
+              </div>
+            </div>
           </form>
             {
               input.countries.map( el => {
