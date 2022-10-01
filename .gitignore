@@ -109,3 +109,4 @@ package-lock.json
 # media
 *.jpg
 *.mp4
+*.png
