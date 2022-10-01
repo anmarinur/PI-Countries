@@ -35,6 +35,8 @@ export default function AddActivity() {
       countries: 'Elija al menos un país'
   });
   let arrayCountries = input.countries;
+  let filterCountries = [];
+  let arrayFlags = [];
 
   function validate(input) {
     if (!input.name) {
@@ -62,13 +64,11 @@ export default function AddActivity() {
     } else {
       errors.season = '';
     }
-    console.log(input.countries)
     if(input.countries.length === 0) {
       errors.countries = 'Elija al menos un país'
     } else {
       errors.countries = ''
     }
-    console.log(errors.countries)
     return errors;
   }
 
@@ -122,10 +122,15 @@ export default function AddActivity() {
   }
 
   function handleDelete(el) {
+    filterCountries = input.countries.filter((country) => country !== el)
     setInput({
       ...input,
-      countries: input.countries.filter((country) => country !== el)
+      countries: filterCountries
     })
+    setErrors(validate({
+      ...input,
+      countries: filterCountries
+  }))
   }
 
   useEffect(() => {
@@ -141,7 +146,7 @@ export default function AddActivity() {
         </div>
         
         <div className={style.body}>  
-          <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
+          <form className={style.form}>
             <div className={style.contInputs}>
               <div className={style.nameError}>
                 <label>Name:</label>
@@ -166,7 +171,7 @@ export default function AddActivity() {
               <input className={style.input} type="number" value={input.duration} placeholder="Duration..." name="duration" onChange={(e) => handleChange(e)} autoComplete='off'></input>
             </div>
 
-            <div className={style.contInputs}>
+            <div className={style.contInputsRadio}>
               <div className={style.nameError}>
                 <label>Season:</label>
                 {errors.season && <p className={style.error}>{errors.season}</p>}
@@ -195,24 +200,35 @@ export default function AddActivity() {
                   })
                 }
                 </select>
-                {
-                  <button className={style.buttonSelect} type="submit" disabled={errors.name || errors.difficulty || errors.duration || errors.season || errors.countries ? true : ''}>Agregar</button>
-                }
+                <div className={style.contCountries}>
+                  {
+                    input.countries.forEach((el) => {
+                      if(!arrayFlags.includes(el)) {
+                        arrayFlags.push(el)
+                      }
+                    })
+                  }
+                  {
+                    arrayFlags.map( el => {
+                      const flag = countries.find((country) => country.id === el)
+                      return (
+                        <div key={el} className={style.contCountry}>
+                          <img className={style.flag} src={flag.flagImg} key={el} alt="flag" onClick={() => handleDelete(el)}/>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
               </div>
             </div>
           </form>
-            {
-              input.countries.map( el => {
-                return (
-                  <div>
-                    <p>{el}</p>
-                    <button key={el} onClick={() => handleDelete(el)}>x</button>
-                  </div>
-                )
-              })
-            }
           </div>
-          <Link to="/home"><button>Home</button></Link>
+          <div className={style.contButtons}>
+            {
+              <button className={style.button} type="submit" disabled={errors.name || errors.difficulty || errors.duration || errors.season || errors.countries ? true : ''} onClick={(e) => handleSubmit(e)}>Agregar</button>
+            }
+            <Link to="/home"><button className={style.button}>Home</button></Link>              
+          </div>
         </div>
       </div>
   )
