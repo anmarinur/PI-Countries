@@ -1,10 +1,11 @@
-import image from '../assets/error.jpg'
+import image from '../assets/earth_error.png'
+import style from './Error.module.css'
 
 export default function Error({msg}) {
   return (
-    <div>
+    <div className={style.container}>
       <h1>{msg}</h1>
-      <img src={image} alt="error"/>
+      <img className={style.image} src={image} alt="error"/>
     </div>
   )
 }

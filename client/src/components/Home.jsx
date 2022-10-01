@@ -141,7 +141,7 @@ export function Home(){
 
         <div className={style.cards}>
           {
-            typeof currentCountries === 'string' ? <Error msg={currentCountries} /> : currentCountries.map((el) => {
+            typeof currentCountries === 'string' ? <Error msg="País no encontrado" /> : currentCountries.map((el) => {
                   return (
                     <Link key={el.id} style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
                       <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
