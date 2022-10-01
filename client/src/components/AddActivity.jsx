@@ -36,7 +36,6 @@ export default function AddActivity() {
   });
   let arrayCountries = input.countries;
   let filterCountries = [];
-  let arrayFlags = [];
 
   function validate(input) {
     if (!input.name) {
@@ -96,7 +95,9 @@ export default function AddActivity() {
   }
 
   function handleSelect(e) {
-    arrayCountries.push(e.target.value)
+    if (!input.countries.includes(e.target.value)) {
+      arrayCountries.push(e.target.value)
+    }
     setInput({
       ...input,
       countries: arrayCountries
@@ -202,14 +203,7 @@ export default function AddActivity() {
                 </select>
                 <div className={style.contCountries}>
                   {
-                    input.countries.forEach((el) => {
-                      if(!arrayFlags.includes(el)) {
-                        arrayFlags.push(el)
-                      }
-                    })
-                  }
-                  {
-                    arrayFlags.map( el => {
+                    arrayCountries.map( el => {
                       const flag = countries.find((country) => country.id === el)
                       return (
                         <div key={el} className={style.contCountry}>

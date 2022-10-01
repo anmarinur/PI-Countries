@@ -35,6 +35,22 @@
   margin-top: 20px;
 }
 
+.h2 {
+  color: white;
+  cursor: pointer;
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  font-family: inherit;
+  font-size: 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+}
+
 .cards {
   display: flex;
   flex-direction: row;

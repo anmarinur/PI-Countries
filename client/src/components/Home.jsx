@@ -90,10 +90,11 @@ export function Home(){
     <div className={style.container}>
       <img className={style.imgbg} src={image} alt="background"/>
       <div className={style.blur}>
+
         <div className={style.header}>
-          <button onClick={(e) => handlerClickHome(e)}>Home</button>
+          <h2 className={style.h2} onClick={(e) => handlerClickHome(e)}>Home</h2>
           <SearchBar />
-          <Link to='/activities'><button>Add activity</button></Link>
+          <Link style={{ textDecoration: 'none' }} to='/activities'><h2 className={style.h2}>Add activity</h2></Link>
           <div>
             <h3>Order by Name</h3>
             <select onChange={(e) => handlerOrderByName(e)}>
@@ -135,8 +136,9 @@ export function Home(){
               }
             </select>
           </div>
-          <button onClick={(e) => handlerClickReset(e)}>Reload</button>
+          <button className={style.button} onClick={(e) => handlerClickReset(e)}>Reload</button>
         </div>
+
         <div className={style.cards}>
           {
             typeof currentCountries === 'string' ? <Error msg={currentCountries} /> : currentCountries.map((el) => {
