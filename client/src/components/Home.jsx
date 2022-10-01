@@ -95,25 +95,25 @@ export function Home(){
           <h2 className={style.h2} onClick={(e) => handlerClickHome(e)}>Home</h2>
           <SearchBar />
           <Link style={{ textDecoration: 'none' }} to='/activities'><h2 className={style.h2}>Add activity</h2></Link>
-          <div>
+          <div className={style.orderTitle}>
             <h3>Order by Name</h3>
-            <select onChange={(e) => handlerOrderByName(e)}>
+            <select className={style.select} onChange={(e) => handlerOrderByName(e)}>
               <option>-</option>
               <option value="ascName">Ascendent</option>
               <option value="descName">Descendent</option>
             </select>
           </div>
-          <div>
+          <div className={style.orderTitle}>
             <h3>Order by Population</h3>
-            <select onChange={(e) => handlerOrderByPopulation(e)}>
+            <select className={style.select} onChange={(e) => handlerOrderByPopulation(e)}>
               <option>-</option>
               <option value="ascPop">Ascendent</option>
               <option value="descPop">Descendent</option>
             </select>
           </div>
-          <div>
+          <div className={style.orderTitle}>
           <h3>Filter by Continent</h3>
-            <select onChange={(e) => handlerFilterContinent(e)}>
+            <select className={style.select} onChange={(e) => handlerFilterContinent(e)}>
               <option value="All">All</option>
               <option value="Africa">Africa</option>
               <option value="Asia">Asia</option>
@@ -123,9 +123,9 @@ export function Home(){
               <option value="South America">South America</option>
             </select>
           </div>
-          <div>
+          <div className={style.orderTitle}>
             <h3>Filter by Activities</h3>
-            <select onChange={(e) => handlerFilterActivity(e)}>
+            <select className={style.select} onChange={(e) => handlerFilterActivity(e)}>
               <option value="All">All</option>
               {
                 allActivities.map((activity, i) => {
@@ -136,7 +136,7 @@ export function Home(){
               }
             </select>
           </div>
-          <button className={style.button} onClick={(e) => handlerClickReset(e)}>Reload</button>
+          <h2 className={style.h2} onClick={(e) => handlerClickReset(e)}>Reload</h2>
         </div>
 
         <div className={style.cards}>
