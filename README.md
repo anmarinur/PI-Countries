@@ -126,8 +126,8 @@ __Ruta de detalle de país__: debe contener
 - [ x ] Código de país de 3 letras (id)
 - [ x ] Capital
 - [ x ] Subregión
-- [ ] Área (Mostrarla en km2 o millones de km2)
-- [ ] Población
+- [ x ] Área (Mostrarla en km2 o millones de km2)
+- [ x ] Población
 - [ ] Actividades turísticas con toda su información asociada
 
 __Ruta de creación de actividad turística__: debe contener

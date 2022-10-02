@@ -23,8 +23,8 @@
 }
 
 .container {
-  width: 70%;
-  height: 85%;
+  min-width: 80%;
+  height: 90%;
   background-color: rgba(3, 232, 244, 0.6);
   border-radius: 10px;
   display: flex;
@@ -32,6 +32,14 @@
   justify-content: space-evenly;
   align-items: center;
   box-sizing: border-box;
+  padding: 50px 100px;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .body {
@@ -41,11 +49,39 @@
   align-items: flex-start;
   box-sizing: border-box;
   width: 60%;
-  height: 90%;
-  margin-bottom: 50px;
+  height: 100%;
+  margin-right: 30px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   padding: 10px 40px;
+}
+
+.activities {
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px 40px;
+  border-radius: 10px;
+  min-width: 30%;
+  
+}
+
+.contActivities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.activity {
+  background-color: rgba(246, 255, 0, 0.5);
+  padding: 10px 40px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  min-width: 30%;
 }
 
 .h1 {
@@ -65,7 +101,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   width: 100%
 }
 
@@ -75,8 +110,20 @@
   margin-left: 10px;
 }
 
+.p3{
+  font-size: 20px;
+  color: black;
+  margin-left: 10px;
+}
+
+
 .h2 {
   font-size: 30px;
+  color: rgb(164, 0, 0)
+}
+
+.h3 {
+  font-size: 20px;
   color: rgb(164, 0, 0)
 }
 
