@@ -78,7 +78,7 @@ export default function Detail(props) {
                           </div>
                         )
                         }
-                      ) : <p className={style.p}>Ninguna actividad</p>
+                      ) : <p className={style.p}>Nothing added yet</p>
                     } 
                   </div>
                 </div>
