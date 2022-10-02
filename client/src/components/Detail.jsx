@@ -15,7 +15,6 @@ export default function Detail(props) {
   }, [props.match.params.id, dispatch]);
 
   const country = useSelector((state) => state.country);
-  console.log(country)
 
   return(
     <div>
@@ -59,22 +58,22 @@ export default function Detail(props) {
                     {
                       country[0].Activities.length > 0 ? country[0].Activities.map ((el, i) => {
                         return (
-                          <div className={style.activity}>
+                          <div key={i} className={style.activity}>
                             <div className={style.subContainer}>
                               <h3 className={style.h3}>Name:</h3>
-                              <p3 className={style.p3}>{el.name}</p3>
+                              <p className={style.p3}>{el.name}</p>
                             </div>
                             <div className={style.subContainer}>
                               <h3 className={style.h3}>Difficulty:</h3>
-                              <p3 className={style.p3}>{el.difficulty}</p3>
+                              <p className={style.p3}>{el.difficulty}</p>
                             </div>
                             <div className={style.subContainer}>
                               <h3 className={style.h3}>Duration:</h3>
-                              <p3 className={style.p3}>{el.duration}</p3>
+                              <p className={style.p3}>{el.duration}</p>
                             </div>
                             <div className={style.subContainer}>
                               <h3 className={style.h3}>Season:</h3>
-                              <p3 className={style.p3}>{el.season}</p3>
+                              <p className={style.p3}>{el.season}</p>
                             </div>
                           </div>
                         )
