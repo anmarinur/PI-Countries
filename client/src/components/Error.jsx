@@ -4,7 +4,7 @@ import style from './Error.module.css'
 export default function Error({msg}) {
   return (
     <div className={style.container}>
-      <h1>{msg}</h1>
+      <h1 className={style.h1}>{msg}</h1>
       <img className={style.image} src={image} alt="error"/>
     </div>
   )

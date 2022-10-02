@@ -57,6 +57,7 @@ export function Home(){
   }
 
   function handlerClickHome(e) {
+    dispatch(filterCountryByContinent('All'));
     setCurrentPage(1);
   }
 
@@ -141,7 +142,7 @@ export function Home(){
 
         <div className={style.cards}>
           {
-            typeof currentCountries === 'string' ? <Error msg="País no encontrado" /> : currentCountries.map((el) => {
+            typeof currentCountries === 'string' ? <Error msg="PAIS NO ENCONTRADO" /> : currentCountries.map((el) => {
                   return (
                     <Link key={el.id} style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
                       <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
