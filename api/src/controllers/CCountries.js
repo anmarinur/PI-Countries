@@ -28,6 +28,7 @@ const getCountry = async (req, res, next) => {
         attributes: ['id', 'flagImg', 'name', 'continent', 'population'],
         include: {
           model: Activity,
+          attributes: ['name', 'difficulty', 'duration', 'season']
         }
       });
       res.json(allCountriesFront);

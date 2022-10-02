@@ -128,17 +128,17 @@ __Ruta de detalle de país__: debe contener
 - [ x ] Subregión
 - [ x ] Área (Mostrarla en km2 o millones de km2)
 - [ x ] Población
-- [ ] Actividades turísticas con toda su información asociada
+- [ x ] Actividades turísticas con toda su información asociada
 
 __Ruta de creación de actividad turística__: debe contener
 
-- [ ] Un formulario __controlado con JavaScript__ con los siguientes campos:
+- [ x ] Un formulario __controlado con JavaScript__ con los siguientes campos:
   - Nombre
   - Dificultad
   - Duración
   - Temporada
-- [ ] Posibilidad de seleccionar/agregar varios países en simultáneo
-- [ ] Botón/Opción para crear una nueva actividad turística
+- [ x ] Posibilidad de seleccionar/agregar varios países en simultáneo
+- [ x ] Botón/Opción para crear una nueva actividad turística
 
 > Es requisito que el formulario de creación esté validado con JavaScript y no sólo con validaciones HTML. Pueden agregar las validaciones que consideren. Por ejemplo: Que el nombre de la actividad no pueda contener símbolos, que la duración no pueda exceder determinado valor, etc.
 
@@ -146,7 +146,7 @@ __Ruta de creación de actividad turística__: debe contener
 
 El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
 
-- [ ] País con las siguientes propiedades:
+- [ x ] País con las siguientes propiedades:
   - ID (Código de 3 letras) *
   - Nombre *
   - Imagen de la bandera *
@@ -155,7 +155,7 @@ El modelo de la base de datos deberá tener las siguientes entidades (Aquellas p
   - Subregión
   - Área
   - Población
-- [ ] Actividad Turística con las siguientes propiedades:
+- [ x ] Actividad Turística con las siguientes propiedades:
   - ID
   - Nombre
   - Dificultad (Entre 1 y 5)
@@ -170,7 +170,7 @@ Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
 
 __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y paginados brindados por la API externa, todas estas funcionalidades tienen que implementarlas ustedes.
 
-- [ ] __GET /countries__:
+- [ x ] __GET /countries__:
   - En una primera instancia deberán traer todos los países desde restcountries y guardarlos en su propia base de datos y luego ya utilizarlos desde allí (Debe retonar sólo los datos necesarios para la ruta principal)
   - Obtener un listado de los paises.
 - [ ] __GET /countries/{idPais}__:
