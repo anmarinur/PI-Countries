@@ -15,6 +15,7 @@ export default function Detail(props) {
   }, [props.match.params.id, dispatch]);
 
   const country = useSelector((state) => state.country);
+  console.log(country)
 
   return(
     <div>
@@ -41,6 +42,10 @@ export default function Detail(props) {
                 <div className={style.subContainer}>
                   <h2 className={style.h2}>Subregion:</h2>
                   <p className={style.p}>{country[0].subregion}</p>
+                </div>
+                <div className={style.subContainer}>
+                  <h2 className={style.h2}>Area:</h2>
+                  <p className={style.p}>{country[0].area} Km<sup>2</sup></p>
                 </div>
                 <div className={style.subContainer}>
                   <h2 className={style.h2}>Population:</h2>
