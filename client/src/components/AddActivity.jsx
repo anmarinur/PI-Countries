@@ -111,6 +111,7 @@ export default function AddActivity() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(postActivity(input));
+    dispatch(setFlag(false))
     alert("Actividad creada correctamente");
     setInput({
       name: '',

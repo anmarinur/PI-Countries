@@ -24,6 +24,7 @@ export function Home(){
   let currentCountries;       // Null
   const countriesPageOne = 9;
   const countriesPerPage = 10;
+  const lastPage = Math.ceil(((allCountries.length - countriesPageOne)/countriesPerPage)+1)
 
 
   if (allCountries.length - countriesPageOne <= 0) {
@@ -44,16 +45,30 @@ export function Home(){
     }
   }
     
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  function paginado (pageNumber) {
+    if (typeof pageNumber === 'number') {
+      setCurrentPage(pageNumber);
+    } else {
+      if (pageNumber === 'prev') {
+        if (currentPage > 1) {
+          const prev = currentPage - 1;
+          setCurrentPage(prev);
+        }
+      } else if (pageNumber === 'next'){
+        if (currentPage < lastPage && lastPage > 1) {
+          const next = currentPage + 1;
+          setCurrentPage(next);
+        }
+      }
+    }
   }
 
   useEffect(() => {
+    dispatch(getActivities())
     if (!flag) {
       dispatch(getCountries())
     }
-    dispatch(getActivities())
-  }, [dispatch]);
+  }, [dispatch, flag]);
 
   function handlerClickReset(e) {
     dispatch(getCountries())
@@ -155,7 +170,7 @@ export function Home(){
         </div>
         <div className={style.pages}>
           {
-            typeof currentCountries === 'string' ? <div></div> : <Paginado statusPages={statusPages} allCountries={allCountries.length} paginado={paginado} />
+            typeof currentCountries === 'string' ? <div></div> : <Paginado statusPages={statusPages} paginado={paginado} lastPage={lastPage} currentPage={currentPage}/>
           }
         </div>
       </div>

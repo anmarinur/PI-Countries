@@ -1,14 +1,12 @@
 import style from './Paginado.module.css'
 
-export default function Paginado({statusPages, allCountries, paginado}) {
+export default function Paginado({statusPages, paginado, lastPage, currentPage}) {
   const pageNumbers = [];
-  const countriesPageOne = 9;
-  const countriesPerPage = 10;
 
   if (statusPages === 'one') {
     pageNumbers.push(1);
   } else {
-    for (let i = 1; i <= Math.ceil(((allCountries - countriesPageOne)/countriesPerPage)+1); i++) {
+    for (let i = 1; i <= lastPage; i++) {
       pageNumbers.push(i);
     }
   }
@@ -16,11 +14,15 @@ export default function Paginado({statusPages, allCountries, paginado}) {
   return (
     <nav>
       <ul>
-        { pageNumbers && pageNumbers.map(number => {
-          return (
-          <button className={style.button} key={number} onClick={() => paginado(number)}>{number}</button>
-          )
-        })}
+        <button className={style.button} onClick={() => paginado('prev')}>Prev</button>
+        { 
+          pageNumbers && pageNumbers.map(number => {
+            return (
+            <button className={number === currentPage ? style.buttonSelected : style.button} key={number} onClick={() => paginado(number)}>{number}</button>
+            )
+          })
+        }
+        <button className={style.button} onClick={() => paginado('next')}>Next</button>
       </ul>
     </nav>
   )
