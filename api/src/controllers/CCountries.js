@@ -33,8 +33,7 @@ const getCountry = async (req, res, next) => {
       });
       res.status(200).json(allCountriesFront);
     } catch (error) {
-      res.status(400).send('The API is not responding')
-      next(error);
+      res.status(400).send('The API is not responding');
     }
   } else {
     try {
@@ -53,10 +52,8 @@ const getCountry = async (req, res, next) => {
       } else {
         throw new Error("Couldn't find a country with that name")
       }
-      
     } catch (error) {
-      res.status(404).json(error.message)
-      next(error);
+      res.status(404).json(error.message);
     }
   }
 }
@@ -79,13 +76,12 @@ const getCountryById = async function (req, res, next) {
       }
     })
     if (infoCountry.length !== 0) {
-      res.status(200).json(infoCountry)
+      res.status(200).json(infoCountry);
     } else {
       throw new Error("Couldn't find a country with that id")
     }
   } catch (error) {
-    res.status(404).json(error.message)
-    next(error)
+    res.status(404).json(error.message);
   }
 }
 
