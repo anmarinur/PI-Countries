@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom';
 import { getCountries, filterCountryByContinent, orderByName, orderByPopulation, getActivities, filterByActivities } from "../actions";
 import Card from './Card/Card';  
-import Paginado from './Paginado';
+import Paginado from './Paginado/Paginado';
 import SearchBar from "./SearchBar";
 import style from './Home.module.css'
 import image from '../assets/static_background.jpg'
