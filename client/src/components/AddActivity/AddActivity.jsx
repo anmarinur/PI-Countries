@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivities, postActivity, setFlag } from '../actions';
-import image from '../assets/static_background.jpg';
+import { getActivities, postActivity, setFlag } from '../../actions';
+import image from '../../assets/static_background.jpg';
 import style from './AddActivity.module.css'
 
 export default function AddActivity() {
+
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(getActivities())
+    dispatch(setFlag(true))
+  }, [dispatch]);
+
   const countries = useSelector((state) => state.countriesBackUp);
-  const activities = useSelector((state) => state.activities)
+  const activities = useSelector((state) => state.activities);
   const countriesOrdered = countries.sort((a, b) => {
     if (a.name > b.name) {
       return 1;
@@ -63,6 +70,7 @@ export default function AddActivity() {
     } else {
       errors.season = '';
     }
+
     if(input.countries.length === 0) {
       errors.countries = 'Choose at least one country'
     } else {
@@ -111,7 +119,7 @@ export default function AddActivity() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(postActivity(input));
-    dispatch(setFlag(false))
+    dispatch(setFlag(false));
     alert("Activity succesfully created");
     setInput({
       name: '',
@@ -134,11 +142,6 @@ export default function AddActivity() {
       countries: filterCountries
   }))
   }
-
-  useEffect(() => {
-    dispatch(getActivities())
-    dispatch(setFlag(true))
-  }, [dispatch]);
 
   return (
     <div>
@@ -194,14 +197,14 @@ export default function AddActivity() {
               </div>
               <div className={style.contSelect}>
                 <select className={style.select} onChange={(e) => {handleSelect(e)}}>
-                <option>Select countries</option>
-                {
-                  countriesOrdered.map((el) => {
-                    return (
-                      <option key={el.id} value={el.id} name={el.name}>{el.name}</option>
-                    )
-                  })
-                }
+                  <option>Select countries</option>
+                  {
+                    countriesOrdered.map((el) => {
+                      return (
+                        <option key={el.id} value={el.id} name={el.name}>{el.name}</option>
+                      )
+                    })
+                  }
                 </select>
                 <div className={style.contCountries}>
                   {
