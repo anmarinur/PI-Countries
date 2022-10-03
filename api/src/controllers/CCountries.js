@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Op } = require('sequelize');
-const { Country, Activity, CountryActivity } = require('../db');
+const { Country, Activity } = require('../db');
 
 const getCountry = async (req, res, next) => {
   const { name } = req.query;
@@ -31,9 +31,9 @@ const getCountry = async (req, res, next) => {
           attributes: ['name', 'difficulty', 'duration', 'season']
         }
       });
-      res.json(allCountriesFront);
-            
+      res.status(200).json(allCountriesFront);
       } catch (error) {
+        res.status(400).send('The API is not responding')
         next(error);
       }
   } else {
@@ -49,12 +49,13 @@ const getCountry = async (req, res, next) => {
         }
       });
       if (countryByName.length !== 0) {
-        res.json(countryByName);
+        res.status(200).json(countryByName);
       } else {
-        res.json('País no encontrado')
+        throw new Error("Couldn't find a country with thad name")
       }
       
     } catch (error) {
+      res.status(404).json(error.message)
       next(error);
     }
   }
@@ -63,7 +64,6 @@ const getCountry = async (req, res, next) => {
 
 const getCountryById = async function (req, res, next) {
   const {idPais} = req.params;
-
   try {
     const infoCountry = await Country.findAll({
       where: {
@@ -80,13 +80,13 @@ const getCountryById = async function (req, res, next) {
       }
     })
     if (infoCountry.length === 0) {
-      res.json('País no encontrado')
+      throw new Error("Couldn't find a country with that id")
     }
     res.json(infoCountry)
   } catch (error) {
+    res.status(404).json(error.message)
     next(error)
   }
-  
 }
 
 module.exports = {
