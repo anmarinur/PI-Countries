@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getCountryId, setFlag } from '../actions';
+import { getCountryId, setFlag } from '../../actions';
 import { Link } from 'react-router-dom';
 import style from './Detail.module.css'
-import image from '../assets/static_background.jpg'
+import image from '../../assets/static_background.jpg'
 
 export default function Detail(props) {
 
@@ -83,9 +83,7 @@ export default function Detail(props) {
                     } 
                   </div>
                 </div>
-              </div>
-
-              
+              </div>              
             </div>
           ) : <h1>Error</h1>
         }

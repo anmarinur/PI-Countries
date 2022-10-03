@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import LandingPage from './components/LandingPage';
 import AddActivity from './components/AddActivity/AddActivity';
 import style from './App.module.css';
-import Detail from './components/Detail';
+import Detail from './components/Detail/Detail';
 
 function App() {
   return (
