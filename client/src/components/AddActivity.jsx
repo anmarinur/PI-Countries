@@ -28,43 +28,43 @@ export default function AddActivity() {
     countries: []
   })
   const [errors, setErrors] = useState({
-      name: 'Se requiere un nombre',
-      difficulty: 'Elija un valor entre 1 y 5',
-      duration: 'Elija un valor entre 1 y 20',
-      season: 'Elija al menos una estación del año',
-      countries: 'Elija al menos un país'
+      name: 'Enter a valid name',
+      difficulty: 'Choose a value between 1 and 5',
+      duration: 'Choose a value between 1 and 20',
+      season: 'Choose one season',
+      countries: 'Choose at least one country'
   });
   let arrayCountries = input.countries;
   let filterCountries = [];
 
   function validate(input) {
     if (!input.name) {
-      errors.name = 'Se requiere un nombre';
+      errors.name = 'Enter a valid name';
     } else if (activities.includes(input.name)) {
-      errors.name = 'Actividad ya registrada'
+      errors.name = 'Activity already registered'
     } else {
       errors.name = '';
     }
     
     if(input.difficulty > 5 || input.difficulty < 1) {
-      errors.difficulty = 'Elija un valor entre 1 y 5'
+      errors.difficulty = 'Choose a value between 1 and 5'
     } else {
       errors.difficulty = '';
     }
 
     if(input.duration < 1 || input.duration > 20) {
-      errors.duration = 'Elija un valor entre 1 y 20'
+      errors.duration = 'Choose a value between 1 and 20'
     } else {
       errors.duration = '';
     }
 
     if (!input.season) {
-      errors.season = 'Elija al menos una estación del año'
+      errors.season = 'Choose at least on season'
     } else {
       errors.season = '';
     }
     if(input.countries.length === 0) {
-      errors.countries = 'Elija al menos un país'
+      errors.countries = 'Choose at least one country'
     } else {
       errors.countries = ''
     }
@@ -112,7 +112,7 @@ export default function AddActivity() {
     e.preventDefault();
     dispatch(postActivity(input));
     dispatch(setFlag(false))
-    alert("Actividad creada correctamente");
+    alert("Activity succesfully created");
     setInput({
       name: '',
       difficulty: 0,
