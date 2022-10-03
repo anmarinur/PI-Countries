@@ -1,23 +1,16 @@
-// const axios = require('axios');
-const { Country, Activity, CountryActivity } = require('../db');
+const { Country, Activity } = require('../db');
 
 const postActivity = async function(req, res, next) {
-
   const { name, difficulty, duration, season, countries } = req.body;
   try {
-
     const activity = await Activity.create({
       name, difficulty, duration, season
     });
-
     await activity.addCountry(countries);
-
-    res.json(activity);
-
+    res.status(200).json(activity);
   } catch (error) {
-    next(error);
+    res.status(400).send("Error, the activity wasn't created")
   }
-
 }
 
 const getActivities = async function(req, res, next) {
@@ -30,9 +23,9 @@ const getActivities = async function(req, res, next) {
         model: Country
       }
     })
-    res.json(activities)
+    res.status(200).json(activities);
   } catch (error) {
-    next(error)
+    res.status(404).send("Error getting activities")
   }
 }
 

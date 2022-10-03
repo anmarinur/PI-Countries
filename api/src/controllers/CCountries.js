@@ -17,7 +17,7 @@ const getCountry = async (req, res, next) => {
             name: p.name.common,
             flagImg: p.flags[1],
             continent: p.continents[0],
-            capital: !p.capital ? 'No tiene' : p.capital[0],
+            capital: !p.capital ? "This country doesn't have a capital" : p.capital[0],
             subregion: p.subregion,
             area: p.area,
             population: p.population
@@ -32,10 +32,10 @@ const getCountry = async (req, res, next) => {
         }
       });
       res.status(200).json(allCountriesFront);
-      } catch (error) {
-        res.status(400).send('The API is not responding')
-        next(error);
-      }
+    } catch (error) {
+      res.status(400).send('The API is not responding')
+      next(error);
+    }
   } else {
     try {
       const countryByName = await Country.findAll({
@@ -61,7 +61,6 @@ const getCountry = async (req, res, next) => {
   }
 }
 
-
 const getCountryById = async function (req, res, next) {
   const {idPais} = req.params;
   try {
@@ -79,10 +78,11 @@ const getCountryById = async function (req, res, next) {
         }
       }
     })
-    if (infoCountry.length === 0) {
+    if (infoCountry.length !== 0) {
+      res.status(200).json(infoCountry)
+    } else {
       throw new Error("Couldn't find a country with that id")
     }
-    res.json(infoCountry)
   } catch (error) {
     res.status(404).json(error.message)
     next(error)
