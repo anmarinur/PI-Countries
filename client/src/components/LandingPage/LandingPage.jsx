@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './LandingPage.module.css';
-import image from '../assets/background.jpg'
-import video from '../assets/video_background.mp4'
+import image from '../../assets/background.jpg'
+import video from '../../assets/video_background.mp4'
 
 
 export default function LandingPage (){
