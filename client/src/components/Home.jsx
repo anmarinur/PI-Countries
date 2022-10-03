@@ -13,6 +13,7 @@ export function Home(){
 
   const allCountries = useSelector((state) => state.countries);
   const allActivities = useSelector((state) => state.activities);
+  const flag = useSelector((state) => state.flag)
   const dispatch = useDispatch();
 
   const [render, setRender] = useState('');
@@ -48,7 +49,9 @@ export function Home(){
   }
 
   useEffect(() => {
-    dispatch(getCountries())
+    if (!flag) {
+      dispatch(getCountries())
+    }
     dispatch(getActivities())
   }, [dispatch]);
 
@@ -57,7 +60,6 @@ export function Home(){
   }
 
   function handlerClickHome(e) {
-    dispatch(filterCountryByContinent('All'));
     setCurrentPage(1);
   }
 

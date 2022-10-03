@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivities, postActivity } from '../actions';
+import { getActivities, postActivity, setFlag } from '../actions';
 import image from '../assets/static_background.jpg';
 import style from './AddActivity.module.css'
 
@@ -136,6 +136,7 @@ export default function AddActivity() {
 
   useEffect(() => {
     dispatch(getActivities())
+    dispatch(setFlag(true))
   }, [dispatch]);
 
   return (

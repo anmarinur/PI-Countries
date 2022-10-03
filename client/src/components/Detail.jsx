@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getCountryId } from '../actions';
+import { getCountryId, setFlag } from '../actions';
 import { Link } from 'react-router-dom';
 import style from './Detail.module.css'
 import image from '../assets/static_background.jpg'
@@ -12,6 +12,7 @@ export default function Detail(props) {
 
   useEffect(() => {
     dispatch(getCountryId(props.match.params.id));
+    dispatch(setFlag(true))
   }, [props.match.params.id, dispatch]);
 
   const country = useSelector((state) => state.country);

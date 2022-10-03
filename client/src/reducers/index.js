@@ -1,11 +1,12 @@
-import { FILTER_BY_ACTIVITIES, FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION, POST_ACTIVITY } from "../types";
+import { FILTER_BY_ACTIVITIES, FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION, POST_ACTIVITY, SET_FLAG } from "../types";
 
 const initialState = {
   countries: [],
   countriesBackUp: [],
   activities: [],
   activitiesFull: [],
-  country: []
+  country: [],
+  flag: false
 }
 
 function rootReducer(state = initialState, action){
@@ -109,8 +110,13 @@ function rootReducer(state = initialState, action){
                         ...state,
                         countries: countriesByActivity
                       }
-                      default:
-                        return state;  
+                      case SET_FLAG:
+                        return {
+                          ...state,
+                          flag: action.payload
+                        }
+                        default:
+                          return state;  
   }
 }
 

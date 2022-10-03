@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FILTER_BY_ACTIVITIES, FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION } from '../types';
+import { FILTER_BY_ACTIVITIES, FILTER_BY_CONTINENTS, GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRY_ID, GET_NAME_COUNTRIES, ORDER_BY_NAME, ORDER_BY_POPULATION, SET_FLAG } from '../types';
 
 
 export function getCountries() {
@@ -81,6 +81,13 @@ export function orderByName(payload) {
 export function orderByPopulation(payload) {
   return {
     type: ORDER_BY_POPULATION,
+    payload
+  }
+}
+
+export function setFlag(payload) {
+  return {
+    type: SET_FLAG,
     payload
   }
 }

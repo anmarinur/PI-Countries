@@ -7,3 +7,4 @@ export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const POST_ACTIVITY = 'POST_ACTIVITY';
 export const GET_COUNTRY_ID = 'GET_COUNTRY_ID';
 export const FILTER_BY_ACTIVITIES = 'FILTER_BY_ACTIVITIES';
+export const SET_FLAG = 'SET_FLAG'
