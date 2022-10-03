@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom';
-import { getCountries, filterCountryByContinent, orderByName, orderByPopulation, getActivities, filterByActivities } from "../actions";
-import Card from './Card/Card';  
-import Paginado from './Paginado/Paginado';
-import SearchBar from "./SearchBar/SearchBar";
+import { getCountries, filterCountryByContinent, orderByName, orderByPopulation, getActivities, filterByActivities } from "../../actions";
+import Card from '../Card/Card';  
+import Paginado from '../Paginado/Paginado';
+import SearchBar from "../SearchBar/SearchBar";
 import style from './Home.module.css'
-import image from '../assets/static_background.jpg'
+import image from '../../assets/static_background.jpg'
 
 export function Home(){
 
   const allCountries = useSelector((state) => state.countries);
   const allActivities = useSelector((state) => state.activities);
-  const flag = useSelector((state) => state.flag)
+  const flag = useSelector((state) => state.flag);
   const dispatch = useDispatch();
 
   const [render, setRender] = useState('');
+
+  useEffect(() => {
+    dispatch(getActivities())
+    if (!flag) {
+      dispatch(getCountries())
+    }
+  }, [dispatch, flag]);
   
   // Paginado
   const [currentPage, setCurrentPage] = useState(1);  // 1
@@ -23,7 +30,7 @@ export function Home(){
   let currentCountries;       // Null
   const countriesPageOne = 9;
   const countriesPerPage = 10;
-  const lastPage = Math.ceil(((allCountries.length - countriesPageOne)/countriesPerPage)+1)
+  const lastPage = Math.ceil(((allCountries.length - countriesPageOne)/countriesPerPage)+1);
 
 
   if (allCountries.length - countriesPageOne <= 0) {
@@ -61,13 +68,6 @@ export function Home(){
       }
     }
   }
-
-  useEffect(() => {
-    dispatch(getActivities())
-    if (!flag) {
-      dispatch(getCountries())
-    }
-  }, [dispatch, flag]);
 
   function handlerClickReset(e) {
     dispatch(getCountries())
