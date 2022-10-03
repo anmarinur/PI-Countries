@@ -157,7 +157,7 @@ export function Home(){
         </div>
         <div className={style.cards}>
           {
-            currentCountries.map((el) => {
+            currentCountries.length === 0 ? [] :currentCountries.map((el) => {
               return (
                 <Link key={el.id} style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
                   <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>

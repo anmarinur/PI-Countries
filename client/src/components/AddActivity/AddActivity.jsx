@@ -183,10 +183,10 @@ export default function AddActivity() {
                 {errors.season && <p className={style.error}>{errors.season}</p>}
               </div>
               <div className={style.contRadios}>
-                <label><input className={style.inputRadio} type="radio" value="Verano" name="season" onChange={(e) => handleCheck(e)}/> Verano</label>
-                <label><input className={style.inputRadio} type="radio" value="Otoño" name="season" onChange={(e) => handleCheck(e)}/> Otoño</label>
-                <label><input className={style.inputRadio} type="radio" value="Invierno" name="season" onChange={(e) => handleCheck(e)}/> Invierno</label>
-                <label><input className={style.inputRadio} type="radio" value="Primavera" name="season" onChange={(e) => handleCheck(e)}/> Primavera</label>
+                <label><input className={style.inputRadio} type="radio" value="Verano" name="season" onChange={(e) => handleCheck(e)}/> Summer</label>
+                <label><input className={style.inputRadio} type="radio" value="Otoño" name="season" onChange={(e) => handleCheck(e)}/> Autumn</label>
+                <label><input className={style.inputRadio} type="radio" value="Invierno" name="season" onChange={(e) => handleCheck(e)}/> Winter</label>
+                <label><input className={style.inputRadio} type="radio" value="Primavera" name="season" onChange={(e) => handleCheck(e)}/> Spring</label>
               </div>
             </div>
             
@@ -224,7 +224,7 @@ export default function AddActivity() {
           </div>
           <div className={style.contButtons}>
             {
-              <button className={style.button} type="submit" disabled={errors.name || errors.difficulty || errors.duration || errors.season || errors.countries ? true : ''} onClick={(e) => handleSubmit(e)}>Agregar</button>
+              <button className={style.button} type="submit" disabled={errors.name || errors.difficulty || errors.duration || errors.season || errors.countries ? true : ''} onClick={(e) => handleSubmit(e)}>Add</button>
             }
             <Link to="/home"><button className={style.button}>Home</button></Link>              
           </div>

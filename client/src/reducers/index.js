@@ -103,7 +103,7 @@ function rootReducer(state = initialState, action){
                     case FILTER_BY_ACTIVITIES:
                       const allCountriesCopy = state.countriesBackUp;
                       const allActivitiesFull = state.activitiesFull;
-                      const allCountriesActivities = allCountriesCopy.filter((country) => country.Activities.length > 0);
+                      const allCountriesActivities = allCountriesCopy.filter((country) => country.Activities?.length > 0);
                       const activityFiltered = allActivitiesFull.filter((activity) => activity.name === action.payload);
                       const countriesByActivity = action.payload === 'All' ? allCountriesActivities : activityFiltered[0].Countries
                       return {
