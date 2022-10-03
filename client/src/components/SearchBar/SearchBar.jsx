@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getNameCountries } from "../actions";
+import { getNameCountries } from "../../actions";
 import style from './SearchBar.module.css'
 
 export default function SearchBar () {
@@ -16,7 +16,7 @@ export default function SearchBar () {
   function handlerSubmit(e) {
     e.preventDefault();
     if (name === '') {
-      alert('You must introduce one or more letters')
+      alert('You must enter one or more letters')
     } else {
       dispatch(getNameCountries(name))
     }
