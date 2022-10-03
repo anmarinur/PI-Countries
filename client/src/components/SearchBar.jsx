@@ -15,7 +15,11 @@ export default function SearchBar () {
 
   function handlerSubmit(e) {
     e.preventDefault();
-    dispatch(getNameCountries(name))
+    if (name === '') {
+      alert('You must introduce one or more letters')
+    } else {
+      dispatch(getNameCountries(name))
+    }
     setName('')
   }
 

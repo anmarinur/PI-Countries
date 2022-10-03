@@ -21,7 +21,7 @@ export function getNameCountries(name) {
         payload: json.data
       })
     } catch (error) {
-      console.log(error);
+      alert(error.request.response)
     }
   }
 }
@@ -35,7 +35,7 @@ export function getCountryId(id) {
         payload: json.data
       })
     } catch(error) {
-      console.log(error)
+      alert(error.request.response)
     }
   }
 }

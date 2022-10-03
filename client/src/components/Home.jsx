@@ -2,8 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom';
 import { getCountries, filterCountryByContinent, orderByName, orderByPopulation, getActivities, filterByActivities } from "../actions";
-import Card from './Card';
-import Error from "./Error";
+import Card from './Card';  
 import Paginado from './Paginado';
 import SearchBar from "./SearchBar";
 import style from './Home.module.css'
@@ -156,21 +155,20 @@ export function Home(){
           </div>
           <h2 className={style.h2} onClick={(e) => handlerClickReset(e)}>Reload</h2>
         </div>
-
         <div className={style.cards}>
           {
-            typeof currentCountries === 'string' ? <Error msg="Nothing here" /> : currentCountries.map((el) => {
-                  return (
-                    <Link key={el.id} style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
-                      <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
-                    </Link>
-                  )
-                })
+            currentCountries.map((el) => {
+              return (
+                <Link key={el.id} style={{ textDecoration: 'none' }} to={'/home/' + el.id}>
+                  <Card name= {el.name} continent={el.continent} flagImg = {el.flagImg} key={el.name}/>
+                </Link>
+              )
+            })
           }
         </div>
         <div className={style.pages}>
           {
-            typeof currentCountries === 'string' ? <div></div> : <Paginado statusPages={statusPages} paginado={paginado} lastPage={lastPage} currentPage={currentPage}/>
+            <Paginado statusPages={statusPages} paginado={paginado} lastPage={lastPage} currentPage={currentPage}/>
           }
         </div>
       </div>

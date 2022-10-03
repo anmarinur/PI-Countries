@@ -87,7 +87,7 @@ export default function Detail(props) {
 
               
             </div>
-          ) : <h1>Loading...</h1>
+          ) : <h1>Error</h1>
         }
         <Link to="/home">
           <button className={style.button}>Back</button>

@@ -51,7 +51,7 @@ const getCountry = async (req, res, next) => {
       if (countryByName.length !== 0) {
         res.status(200).json(countryByName);
       } else {
-        throw new Error("Couldn't find a country with thad name")
+        throw new Error("Couldn't find a country with that name")
       }
       
     } catch (error) {
