@@ -1,0 +1,32 @@
+.container {
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.input {
+  height: 40px;
+  border-radius: 50px;
+  border: none;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 20px;
+}
+
+.input:focus {
+  box-shadow: 0 0 2px white,
+              0 0 10px white;
+  outline: 0 none;
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  font-family: inherit;
+  font-size: 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+}

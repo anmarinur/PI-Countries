@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Op } = require('sequelize');
-const { Country, Activity, CountryActivity } = require('../db');
+const { Country, Activity } = require('../db');
 
 const getCountry = async (req, res, next) => {
   const { name } = req.query;
@@ -17,7 +17,7 @@ const getCountry = async (req, res, next) => {
             name: p.name.common,
             flagImg: p.flags[1],
             continent: p.continents[0],
-            capital: !p.capital ? 'No tiene' : p.capital[0],
+            capital: !p.capital ? "This country doesn't have a capital" : p.capital[0],
             subregion: p.subregion,
             area: p.area,
             population: p.population
@@ -25,13 +25,16 @@ const getCountry = async (req, res, next) => {
         });
       });
       const allCountriesFront = await Country.findAll({
-        attributes: ['flagImg', 'name', 'continent']
+        attributes: ['id', 'flagImg', 'name', 'continent', 'population'],
+        include: {
+          model: Activity,
+          attributes: ['name', 'difficulty', 'duration', 'season']
+        }
       });
-      res.json(allCountriesFront);
-            
-      } catch (error) {
-        next(error);
-      }
+      res.status(200).json(allCountriesFront);
+    } catch (error) {
+      res.status(400).send('The API is not responding');
+    }
   } else {
     try {
       const countryByName = await Country.findAll({
@@ -45,21 +48,18 @@ const getCountry = async (req, res, next) => {
         }
       });
       if (countryByName.length !== 0) {
-        res.json(countryByName);
+        res.status(200).json(countryByName);
       } else {
-        res.json('País no encontrado')
+        throw new Error("Couldn't find a country with that name")
       }
-      
     } catch (error) {
-      next(error);
+      res.status(404).json(error.message);
     }
   }
 }
 
-
 const getCountryById = async function (req, res, next) {
   const {idPais} = req.params;
-
   try {
     const infoCountry = await Country.findAll({
       where: {
@@ -70,16 +70,19 @@ const getCountryById = async function (req, res, next) {
       },
       include: {
         model: Activity,
+        attributes: {
+          exclude: ['id', 'createdAt', 'updatedAt']
+        }
       }
     })
-    if (infoCountry.length === 0) {
-      res.json('País no encontrado')
+    if (infoCountry.length !== 0) {
+      res.status(200).json(infoCountry);
+    } else {
+      throw new Error("Couldn't find a country with that id")
     }
-    res.json(infoCountry)
   } catch (error) {
-    next(error)
+    res.status(404).json(error.message);
   }
-  
 }
 
 module.exports = {

@@ -1,35 +1,32 @@
-// const axios = require('axios');
-const { Country, Activity, CountryActivity } = require('../db');
+const { Country, Activity } = require('../db');
 
 const postActivity = async function(req, res, next) {
-
   const { name, difficulty, duration, season, countries } = req.body;
   try {
-
     const activity = await Activity.create({
       name, difficulty, duration, season
     });
-
     await activity.addCountry(countries);
-
-    // const prueba = await Country.findAll({
-    //   include: {
-    //     model: Activity,
-    //     as: 'Activities'
-    //   }
-    // });
-
-    // const prueba2 = await Activity.findAll({
-    //   include: {
-    //     model: Country
-    //   }
-    // })
-    res.json(activity);
-
+    res.status(200).json(activity);
   } catch (error) {
-    next(error);
+    res.status(400).send("Error, the activity wasn't created")
   }
-
 }
 
-module.exports = postActivity;
+const getActivities = async function(req, res, next) {
+  try {
+    const activities = await Activity.findAll({
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      },
+      include: {
+        model: Country
+      }
+    })
+    res.status(200).json(activities);
+  } catch (error) {
+    res.status(404).send("Error getting activities")
+  }
+}
+
+module.exports = { postActivity, getActivities };

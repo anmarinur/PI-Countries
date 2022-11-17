@@ -1,25 +1,23 @@
 import React from 'react'
-import './App.css';
-<<<<<<< HEAD
-import { Route } from 'react-router-dom';
-import Landing from './components/Landing';
+import { Home } from './components/Home/Home';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import LandingPage from './components/LandingPage/LandingPage';
+import AddActivity from './components/AddActivity/AddActivity';
+import style from './App.module.css';
+import Detail from './components/Detail/Detail';
 
 function App() {
   return (
-    <div className="App">
-     <Route path="/" component = {Landing} />
-    </div>
-=======
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <h1>Henry Countries</h1>
+    <BrowserRouter>
+      <div className={style.app}>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/home/:id" component={Detail} />
+          <Route path="/home" component={Home} />
+          <Route path="/activities" component={AddActivity} />
+        </Switch>
       </div>
-    </Router>
->>>>>>> d052559903c76ca708ca399d1aa3093c7361e564
+    </BrowserRouter>
   );
 }
 
